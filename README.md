@@ -6,11 +6,11 @@ Belajar bikin project akuntansi
 
 Untuk menjalankan projectnya : 
 
-1. Siapkan database MySQL
+1. Siapkan database Postgresql
 
-    * nama db : belajar_development 
-    * username : root 
-    * password : admin 
+    * nama db : akunting_development 
+    * username : test 
+    * password : test 
 
 2. Jalankan mvn clean install di top level folder
 3. Masuk ke folder web, kemudian jalankan mvn jetty:run
