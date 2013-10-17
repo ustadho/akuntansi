@@ -1,0 +1,3 @@
+id,username,fullname,password,active,id_role
+admin,admin,Administrator,admin,true,superuser
+staf,staf,Staf Kantor,123,true,staff
