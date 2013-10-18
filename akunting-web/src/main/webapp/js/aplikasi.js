@@ -1,4 +1,4 @@
-angular.module('belajar', ['ui', 'belajar.controller'])
+angular.module('belajar', ['$strap.directives', 'ui', 'belajar.controller'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {templateUrl: 'pages/home.html'})
@@ -11,6 +11,7 @@ angular.module('belajar', ['ui', 'belajar.controller'])
             .when('/system/menu', {templateUrl: 'pages/system/menu.html', controller: 'SystemMenuController'})
             .when('/master/coa', {templateUrl: 'pages/master/coa-list.html', controller: 'CoaController'})
             .when('/master/test', {templateUrl: 'pages/master/test.html', controller: 'CoaController'})
+            .when('/transaksi/jurnal', {templateUrl: 'pages/transaksi/jurnal.html', controller: 'JurnalController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});
     }])

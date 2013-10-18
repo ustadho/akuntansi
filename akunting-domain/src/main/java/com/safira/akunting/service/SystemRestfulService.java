@@ -12,14 +12,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface SystemRestfulService extends MonitoredService {
-	// konfigurasi aplikasi
-	void save(ApplicationConfig ac);
-	void delete(ApplicationConfig ac);
-	ApplicationConfig findApplicationConfigById(String id);
-        Page<ApplicationConfig> findAllApplicationConfigs(Pageable pageable);
-	Long countAllApplicationConfigs();
-	Long countApplicationConfigs(String search);
-	Page<ApplicationConfig> findApplicationConfigs(String search, Pageable pageable);
+    // konfigurasi aplikasi
+    void save(ApplicationConfig ac);
+    void delete(ApplicationConfig ac);
+    ApplicationConfig findApplicationConfigById(String id);
+    Page<ApplicationConfig> findAllApplicationConfigs(Pageable pageable);
+    Long countAllApplicationConfigs();
+    Long countApplicationConfigs(String search);
+    Page<ApplicationConfig> findApplicationConfigs(String search, Pageable pageable);
         
     // menu
     void save(Menu m);

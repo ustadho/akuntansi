@@ -171,4 +171,30 @@ angular.module('belajar.service', ['ngResource'])
         };
         return service;
     }])
+    .factory('JurnalService', ['$resource', '$http', function($resource, $http){
+        var service = {
+            jurnal: $resource('jurnal/:id', {}, {
+                queryPage: {method:'GET', isArray: false}
+            }),
+            get: function(param, callback){ return this.jurnal.get(param, callback) }, 
+            query: function(p, callback){ return this.jurnal.queryPage({"page.page": p, "page.size": 10}, callback) },
+            save: function(obj, oldAccNo){
+                console.log(oldAccNo);
+                if(oldAccNo == null ){
+                    return $http.post('jurnal', obj);
+                } else {
+                    return $http.put('jurnal/'+oldAccNo, obj);
+                }
+            }, 
+            remove: function(obj){
+                if(obj.accNo != null){
+                    return $http.delete('jurnal/'+obj.accNo);
+                }
+            }, 
+            listAll: function(){
+                return $http.get('jurnal/all');
+            }
+        };
+        return service;
+    }])
 ;

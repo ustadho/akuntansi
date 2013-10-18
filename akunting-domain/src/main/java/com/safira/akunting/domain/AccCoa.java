@@ -5,12 +5,17 @@
 package com.safira.akunting.domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -73,6 +78,9 @@ public class AccCoa {
     
     @Column(name = "acc_groups")
     private String accGroups;
+    
+    @OneToMany(mappedBy = "akun", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<AccJurnalDetail> daftarJurnal=new ArrayList<AccJurnalDetail>();
     
     public String getAccNo() {
         return accNo;
@@ -193,6 +201,14 @@ public class AccCoa {
     public void setAccGroups(String accGroups) {
         this.accGroups = accGroups;
     }
+
+    public List<AccJurnalDetail> getDaftarJurnal() {
+        return daftarJurnal;
+    }
+
+    public void setDaftarJurnal(List<AccJurnalDetail> daftarJurnal) {
+        this.daftarJurnal = daftarJurnal;
+    }
     
-  
+    
 }

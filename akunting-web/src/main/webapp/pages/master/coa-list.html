@@ -46,7 +46,7 @@
                     </tr>
                 </tbody>
             </table>
-            
+
         </div>
         <div class="pagination pagination-centered">
             <ul>
@@ -69,56 +69,44 @@
         </div>
     </div>
 </div>
-        <div ui-modal class="fade" ng-model="showCoaDialog" id="dialogCoa">
-            <div class="modal-header">
-                <button type="button" class="close" ng-click="showCoaDialog=false">×</button>
-                <h3>{{modalTitle}}</h3>
-            </div>
+<div ui-modal class="fade" ng-model="showCoaDialog" id="dialogCoa">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="showCoaDialog=false">×</button>
+        <h3>{{modalTitle}}</h3>
+    </div>
 
-            <div class="modal-body">
-                <form class="form-horizontal" name="formEdit">
-                    <table border="0">
-                        <tbody>
-                            <tr>
-                                <td><label class="control-label" for="accNo">Acc No.</label></td>
-                                <td>:</td>
-                                <td><input type="text" id="fullname" name="accNo" placeholder="No. Akun" 
-                                           ng-model="currentCoa.accNo" required ng-disabled="oldAccNo" ui-validate="{accNoAvailable: isAccNoAvailable}">
-                                    <span ng-show="formEdit.accNo.$error.required" class="help-inline">Harus diisi</span></td>
-                                <span ng-show="formEdit.accNo.$error.accNoAvailable" class="help-inline">sudah ada yang pakai</span>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label" for="accName">Keterangan</label></td>
-                                <td>:</td>
-                                <td><input type="text" id="fullname" name="accName" placeholder="Keterangan Akun" ng-model="currentCoa.accName" required>
-                                    <span ng-show="formEdit.accName.$error.required" class="help-inline">Harus diisi</span></td>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label" for="typeId">Tipe</label></td>
-                                <td>:</td>
-                                <td>
-                                    <select ui-select2 ng-model="currentCoa.accGroup.typeId" data-placeholder="-- Select One --" width="200">
-                                        <option></option>
-                                        <option ng-repeat="t in accType" value="{{t.typeId}}">{{t.typeName}}</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label" for="active">Aktif</label></td>
-                                <td>:</td>
-                                <td><input type="checkbox" id="active" name="active" placeholder="Active" ng-model="currentCoa.active"></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+    <div class="modal-body">
+        <form class="form-horizontal" name="formEdit">
+            <div class="control-group" ng-class="{error: formEdit.accNo.$invalid}">
+                <label class="control-label" for="accNo">Acc No: &nbsp;</label>
+                <td><input type="text" id="accNo" name="accNo" placeholder="No. Akun" 
+                           ng-model="currentCoa.accNo" required ng-disabled="oldAccNo" ui-validate="{accNoAvailable: isAccNoAvailable}">
+                    <span ng-show="formEdit.accNo.$error.required" class="help-inline">Harus diisi</span>
+                    <span ng-show="formEdit.accNo.$error.accNoAvailable" class="help-inline">Sudah dipakai</span>
             </div>
-            <div class="modal-footer">
-                <a class="btn" ng-click="cancelSelectedCoa()">Batal</a>
-                <a class="btn btn-primary" ng-click="simpan()"  ng-disabled="isClean() || formEdit.$invalid">Simpan</a>
+            <div class="control-group"  ng-class="{error: formEdit.accName.$invalid}">
+                <label class="control-label" for="accName">Keterangan : &nbsp;</label>
+                <input type="text" id="accName" name="accName" placeholder="Keterangan Akun" ng-model="currentCoa.accName" 
+                       required ui-validate="{accNameAvailable: isAccNameAvailable}">
+                <span ng-show="formEdit.accName.$error.required" class="help-inline">Harus diisi</span>
+                <span ng-show="formEdit.accName.$error.accNameAvailable" class="help-inline">Sudah dipakai</span>
             </div>
-        </div>
+            <div class="control-group" ng-class="{error: formEdit.typeId.$invalid}">
+                <label class="control-label" for="typeId">Tipe : &nbsp;</label>
+                <select ui-select2 ng-model="currentCoa.accGroup.typeId" data-placeholder="-- Select One --" width="200">
+                    <option></option>
+                    <option ng-repeat="t in accType" value="{{t.typeId}}">{{t.typeName}}</option>
+                </select>
+                <span ng-show="formEdit.typeId.$error.required" class="help-inline">Harus diisi</span>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="active">Aktif</label>
+                <input type="checkbox" id="active" name="active" placeholder="Active" ng-model="currentCoa.active">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a class="btn" ng-click="cancelSelectedCoa()">Batal</a>
+        <a class="btn btn-primary" ng-click="simpan()"  ng-disabled="isClean() || formEdit.$invalid">Simpan</a>
+    </div>
+</div>

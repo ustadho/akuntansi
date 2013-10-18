@@ -5,7 +5,7 @@
 	<artifactId>akunting</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Aplikasi Akunting - Safira</name>
+	<name>Aplikasi Akunting - Siloam Hospitals</name>
 	<inceptionYear>2011</inceptionYear>
 
 	<scm>

@@ -441,7 +441,7 @@ angular.module('belajar.controller', ['belajar.service'])
     }])
         .controller('CoaController', ['$scope', 'CoaService', 'AccTypeService', function($scope, CoaService, AccTypeService) {
         $scope.coa = CoaService.query(0, 1000);
-        $scope.allCoa = CoaService.listAll();
+        $scope.allCoa = [];
         $scope.accType = AccTypeService.query();
         $scope.unselectedCoa = [];
         $scope.modalTitle = "Tambah COA";
@@ -455,6 +455,10 @@ angular.module('belajar.controller', ['belajar.service'])
                 $scope.pages = _.range(1, ($scope.coaPage.totalPages + 1));
             });
         };
+
+        CoaService.listAll().success(function(data) {
+            $scope.allCoa = data;
+        });
 
         $scope.reloadCoaPage();
 
@@ -505,23 +509,23 @@ angular.module('belajar.controller', ['belajar.service'])
 //            if ($scope.currentCoa != null && $scope.currentCoa.accNo != null) {
 //                return true;
 //            }
-            console.log("Coa length: " + $scope.coa);
-            for (var i = 0; i < $scope.coa.length; i++) {
-                var u = $scope.coa[i];
-                console.log("AccNo: " + u);
+//            console.log("Coa length: " + $scope.allCoa.length);
+            for (var i = 0; i < $scope.allCoa.length; i++) {
+                var u = $scope.allCoa[i];
+                //console.log("AccNo: " + u.accNo);
                 if (u.accNo === value) {
                     return false;
                 }
             }
             return true;
         };
-        $scope.isCoanameAvailable = function(value) {
-            if ($scope.currentCoa != null && $scope.currentCoa.accNo != null) {
-                return true;
-            }
-            for (var i = 0; i < $scope.coa.length; i++) {
-                var u = $scope.coa[i];
-                if (u.accNo === value) {
+        $scope.isAccNameAvailable = function(value) {
+//            if ($scope.currentCoa != null && $scope.currentCoa.accNo != null) {
+//                return true;
+//            }
+            for (var i = 0; i < $scope.allCoa.length; i++) {
+                var u = $scope.allCoa[i];
+                if (u.accName === value) {
                     return false;
                 }
             }
@@ -534,19 +538,9 @@ angular.module('belajar.controller', ['belajar.service'])
             $scope.oldAccNo = null;
         }
         $scope.showCoaDialog = false;
-        $scope.tableParams = new ngTableParams({
-            page: 1, // show first page
-            total: data.length, // length of data
-            count: 10           // count per page
-        });
-
-        // watch for changes of parameters
-        $scope.$watch('tableParams', function(params) {
-            // slice array data on pages
-            $scope.users = data.slice(
-                    (params.page - 1) * params.count,
-                    params.page * params.count
-                    );
-        }, true);
+    }])
+        .controller('JurnalController', ['$scope', function($scope) {
+        // Datepicker directive
+        $scope.datepicker = {date: new Date()};
     }])
         ;
