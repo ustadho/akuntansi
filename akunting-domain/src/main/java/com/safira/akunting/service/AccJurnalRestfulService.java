@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
  * @author faheem
  */
 public interface AccJurnalRestfulService extends MonitoredService{
-    Integer save(AccJurnal j);
+    void save(AccJurnal j);
     void delete(AccJurnal j);
     Page<AccJurnal> findAllJournal(Pageable pageable);
     Long countAllJurnal();
@@ -25,5 +25,7 @@ public interface AccJurnalRestfulService extends MonitoredService{
     void delete(AccJurnalDetail d);
     Page<AccJurnalDetail> findAllJurnalDetail(Pageable pageable);
     Long countAllJurnalDetail();
-    List<AccJurnalDetail> findJurnalDetailById(Integer id);
+    AccJurnalDetail findJurnalDetailById(String id);
+
+    public List<AccJurnalDetail> findJurnalDetailByJurnalId(Integer id);
 }

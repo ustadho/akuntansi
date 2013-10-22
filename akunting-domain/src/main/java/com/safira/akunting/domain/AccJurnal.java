@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -30,17 +31,18 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class AccJurnal {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    private String id;
     
-    private Integer id;
     @NotNull
     @NotEmpty
     @Column(name = "journal_no", nullable = false)
     private String journalNo;
 
     @Temporal(TemporalType.DATE)
-    private Date tanggal;
-    
+    @Column(name = "tanggal", insertable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_DATE")
+    private Date tanggal=new Date();
     
     private String description;
     
@@ -54,7 +56,7 @@ public class AccJurnal {
     private Boolean isClosed;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_ins", nullable = false, insertable = false)
+    @Column(name = "date_ins", nullable = false, insertable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date dateIns=new Date();
 
     @ManyToOne
@@ -64,11 +66,11 @@ public class AccJurnal {
     @OneToMany(mappedBy = "jurnal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AccJurnalDetail> listJurnal=new ArrayList<AccJurnalDetail>();
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

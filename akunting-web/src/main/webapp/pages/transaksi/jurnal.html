@@ -26,7 +26,7 @@
                     <label class="control-label" for="description" style="margin-left:6px; ">Keterangan : &nbsp;</label>
                     <div class="controls">
                         <input class="input-xlarge span10" type="text" id="fullname" name="description" placeholder="Keterangan" 
-                                ng-model="currentJurnal.description">
+                               ng-model="currentJurnal.description">
                     </div>
                 </div>
             </fieldset>
@@ -46,21 +46,26 @@
                 </tr>
             </thead>   
             <tbody>
-                <tr ng-repeat="c in coaPage.content | orderBy:accNo">
-                    <td>{{c.accNo}}</td>
-                    <td>{{c.accName}}</td>
-                    <td>{{c.accGroup.typeName}}</td>
-                    <td>{{c.accGroup.groupName}}</td>
+                <tr ng-repeat="d in jurnalDetail">
+                    <td>{{d.akun.accNo}}</td>
+                    <td><select ui-select2 ng-model="d.akun.accName" data-placeholder="-- Select One --" 
+                                width="200" ng-change="ubahAccNo()" >
+                            <option></option>
+                            <option ng-repeat="c in allCoa" value="{{c.accNo}}" >{{c.accName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="d.debet">
+                    </td>
+                    <td>
+                        <input type="text" ng-model="d.kredit">
+                    </td>
                     <td class="center">
-                        <a >
-                            <i class="icon-zoom-in"></i>  
-                            View                                            
-                        </a>
-                        <a ng-click="edit(c)">
+                        <a ng-click="edit(d)">
                             <i class="icon-edit"></i>  
                             Edit                                            
                         </a>
-                        <a ng-click="remove(c)">
+                        <a ng-click="remove(d)">
                             <i class="icon-trash"></i> 
                             Delete
                         </a>
@@ -68,6 +73,9 @@
                 </tr>
             </tbody>
         </table>
-
+        <a ng-click="addItem()">Add Item</a>
+    </div>
+    <div>
+        <a href="#" editable-text="user.name">{{ user.name || "empty" }}</a>
     </div>
 </div>

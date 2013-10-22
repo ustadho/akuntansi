@@ -33,9 +33,8 @@ public class JurnalResftfulServiceImpl implements AccJurnalRestfulService{
     AccJurnalDetailDao accJurnalDetailDao;
     
     @Override
-    public Integer save(AccJurnal j) {
-        return accJurnalDao.save(j).getId();
-        
+    public void save(AccJurnal j) {
+        accJurnalDao.save(j).getId();
     }
 
     @Override
@@ -87,12 +86,16 @@ public class JurnalResftfulServiceImpl implements AccJurnalRestfulService{
 
     @Override
     public AccJurnal findJurnalById(Integer id) {
-        return null; //accJurnalDao.findOne(i);
+        return accJurnalDao.findOne(String.valueOf(id));
     }
 
     @Override
-    public List<AccJurnalDetail> findJurnalDetailById(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public AccJurnalDetail findJurnalDetailById(String id) {
+        return accJurnalDetailDao.findOne(id);
     }
-    
+
+    @Override
+    public List<AccJurnalDetail> findJurnalDetailByJurnalId(Integer id) {
+        return accJurnalDetailDao.findJurnalDetailByJurnalId(id);
+    }
 }

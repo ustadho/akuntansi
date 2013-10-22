@@ -1,4 +1,4 @@
-angular.module('belajar', ['$strap.directives', 'ui', 'belajar.controller'])
+angular.module('belajar', ['$strap.directives', 'ui', 'xeditable', 'belajar.controller'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {templateUrl: 'pages/home.html'})

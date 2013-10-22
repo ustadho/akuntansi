@@ -140,7 +140,10 @@ angular.module('belajar.service', ['ngResource'])
                 if(obj.typeId != null){
                     return $http.delete('acc-type/'+obj.typeId);
                 }
-            }
+            },
+            jurnalDetail : function (obj){
+                return $http.get('jurnal-detail/'+obj.id);
+            }       
         };
             
         return service;

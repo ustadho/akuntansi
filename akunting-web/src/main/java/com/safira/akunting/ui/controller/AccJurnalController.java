@@ -1,13 +1,10 @@
 package com.safira.akunting.ui.controller;
 
 import com.safira.akunting.domain.AccJurnal;
-import com.safira.akunting.domain.Menu;
-import com.safira.akunting.domain.Permission;
+import com.safira.akunting.domain.AccJurnalDetail;
 import com.safira.akunting.domain.Role;
 import com.safira.akunting.service.AccJurnalRestfulService;
-import com.safira.akunting.service.SystemRestfulService;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +41,26 @@ public class AccJurnalController {
         return x;
     }
     
-//    @RequestMapping("/role/{id}/unselected-permission")
+    @RequestMapping("/jurnal-detail/{id}")
+    @ResponseBody
+    public AccJurnalDetail findJurnalDetailById(@PathVariable String id) {
+        AccJurnalDetail x = jurnalRestfulService.findJurnalDetailById(id);
+        if (x == null) {
+            throw new IllegalStateException();
+        }
+        return x;
+    }
+    @RequestMapping("/jurnal-detail-list/{id}")
+    @ResponseBody
+    public List<AccJurnalDetail> findJurnalDetailByJurnalId(@PathVariable Integer id) {
+        List<AccJurnalDetail> x = jurnalRestfulService.findJurnalDetailByJurnalId(id);
+        if (x == null) {
+            throw new IllegalStateException();
+        }
+        return x;
+    }
+
+//    @RequestMapping("/jurnal/{id}/unselected-permission")
 //    @ResponseBody
 //    public List<Permission> findPermissionNotInRole(@PathVariable String id) {
 //        return jurnalRestfulService.findPermissionsNotInRole(jurnalRestfulService.findRoleById(id));
@@ -56,51 +72,89 @@ public class AccJurnalController {
 //        return jurnalRestfulService.findMenuNotInRole(jurnalRestfulService.findRoleById(id));
 //    }
 //
-//    @RequestMapping(value = "/role", method = RequestMethod.POST)
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void create(@RequestBody @Valid Role x, HttpServletRequest request, HttpServletResponse response) {
-//        jurnalRestfulService.save(x);
-//        String requestUrl = request.getRequestURL().toString();
-//        URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, x.getId());
-//        response.setHeader("Location", uri.toASCIIString());
-//    }
-//
-//    @RequestMapping(method = RequestMethod.PUT, value = "/role/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public void update(@PathVariable String id, @RequestBody @Valid Role x) {
-//        Role a = jurnalRestfulService.findRoleById(id);
-//        if (a == null) {
-//            logger.warn("Role dengan id [{}] tidak ditemukan", id);
-//            throw new IllegalStateException();
-//        }
-//        x.setId(a.getId());
-//        jurnalRestfulService.save(x);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/role/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public void delete(@PathVariable String id) {
-//        Role a = jurnalRestfulService.findRoleById(id);
-//        if (a == null) {
-//            logger.warn("Role dengan id [{}] tidak ditemukan", id);
-//            throw new IllegalStateException();
-//        }
-//        jurnalRestfulService.delete(a);
-//    }
-//
-//    @RequestMapping(value = "/role", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<Role> findAll(
-//            Pageable pageable,
-//            HttpServletResponse response) {
-//        List<Role> hasil = jurnalRestfulService.findAllRoles(pageable).getContent();
-//        for(Role r : hasil){
-//            r.setPermissionSet(null);
-//            r.setMenuSet(null);
-//        }
-//        return hasil;
-//
-//    }
+    @RequestMapping(value = "/jurnal", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@RequestBody @Valid AccJurnal x, HttpServletRequest request, HttpServletResponse response) {
+        jurnalRestfulService.save(x);
+        String requestUrl = request.getRequestURL().toString();
+        URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, x.getId());
+        response.setHeader("Location", uri.toASCIIString());
+    }
+    @RequestMapping(value = "/jurnal-detail", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createJurnalDetail(@RequestBody @Valid AccJurnalDetail x, HttpServletRequest request, HttpServletResponse response) {
+        jurnalRestfulService.save(x);
+        String requestUrl = request.getRequestURL().toString();
+        URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, x.getId());
+        response.setHeader("Location", uri.toASCIIString());
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/jurnal/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@PathVariable Integer id, @RequestBody @Valid AccJurnal x) {
+        AccJurnal a = jurnalRestfulService.findJurnalById(id);
+        if (a == null) {
+            logger.warn("Role dengan id [{}] tidak ditemukan", id);
+            throw new IllegalStateException();
+        }
+        x.setId(a.getId());
+        jurnalRestfulService.save(x);
+    }
+    @RequestMapping(method = RequestMethod.PUT, value = "/jurnal-detail/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateJurnalDetail(@PathVariable String id, @RequestBody @Valid AccJurnalDetail x) {
+        AccJurnalDetail a = jurnalRestfulService.findJurnalDetailById(id);
+        if (a == null) {
+            logger.warn("Role dengan id [{}] tidak ditemukan", id);
+            throw new IllegalStateException();
+        }
+        x.setId(a.getId());
+        jurnalRestfulService.save(x);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/jurnal/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable Integer id) {
+        AccJurnal a = jurnalRestfulService.findJurnalById(id);
+        if (a == null) {
+            logger.warn("Role dengan id [{}] tidak ditemukan", id);
+            throw new IllegalStateException();
+        }
+        jurnalRestfulService.delete(a);
+    }
+    @RequestMapping(method = RequestMethod.DELETE, value = "/jurnal-detail/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteJurnalDetail(@PathVariable String id) {
+        AccJurnalDetail a = jurnalRestfulService.findJurnalDetailById(id);
+        if (a == null) {
+            logger.warn("Jurnal detail dengan id [{}] tidak ditemukan", id);
+            throw new IllegalStateException();
+        }
+        jurnalRestfulService.delete(a);
+    }
+
+    @RequestMapping(value = "/jurnal", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AccJurnal> findAll(
+            Pageable pageable,
+            HttpServletResponse response) {
+        List<AccJurnal> hasil = jurnalRestfulService.findAllJournal(pageable).getContent();
+        for (AccJurnal r : hasil) {
+            r.setListJurnal(null);
+        }
+        return hasil;
+    }
+    @RequestMapping(value = "/jurnal-detail", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AccJurnalDetail> findAllJurnalDetail(
+            Pageable pageable,
+            HttpServletResponse response) {
+        List<AccJurnalDetail> hasil = jurnalRestfulService.findAllJurnalDetail(pageable).getContent();
+        for (AccJurnalDetail r : hasil) {
+            r.setAkun(null);
+        }
+        return hasil;
+    }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({IllegalStateException.class})

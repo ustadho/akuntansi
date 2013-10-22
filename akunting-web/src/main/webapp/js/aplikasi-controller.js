@@ -539,8 +539,37 @@ angular.module('belajar.controller', ['belajar.service'])
         }
         $scope.showCoaDialog = false;
     }])
-        .controller('JurnalController', ['$scope', function($scope) {
+        .controller('JurnalController', ['$scope', 'JurnalService', 'CoaService', 
+            function($scope, JurnalService, CoaService) {
         // Datepicker directive
+        CoaService.listAll().success(function(data) {
+            $scope.allCoa = data;
+        });
+        
         $scope.datepicker = {date: new Date()};
+        $scope.jurnal=JurnalService.query();
+        
+        console.log($scope.coaAll);
+        $scope.jurnalDetail=[];
+        
+        $scope.edit = function(x){
+            if(x.id ==null){
+                return;
+            }
+            $scope.currentJurnal = JurnalService.get({id: x.id}, function(data){
+               $scope.original =angular.copy(data); 
+            });
+            JurnalService.jurnalDetail(x).success(function(data){
+               $scope.jurnalDetail= data; 
+            });
+        };
+        
+        $scope.addItem = function(x){
+            $scope.jurnalDetail.splice(1, 0, { 
+                    akun:{accNo:'', accName:''},
+                    debet: 0, 
+                    kredit : 0
+            });
+        };
     }])
         ;
