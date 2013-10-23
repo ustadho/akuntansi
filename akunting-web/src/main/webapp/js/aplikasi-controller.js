@@ -539,37 +539,97 @@ angular.module('belajar.controller', ['belajar.service'])
         }
         $scope.showCoaDialog = false;
     }])
-        .controller('JurnalController', ['$scope', 'JurnalService', 'CoaService', 
-            function($scope, JurnalService, CoaService) {
+        .controller('JurnalController', ['$scope', 'JurnalService', 'CoaService',
+    function($scope, JurnalService, CoaService) {
         // Datepicker directive
+
         CoaService.listAll().success(function(data) {
             $scope.allCoa = data;
         });
-        
+
         $scope.datepicker = {date: new Date()};
-        $scope.jurnal=JurnalService.query();
-        
-        console.log($scope.coaAll);
-        $scope.jurnalDetail=[];
-        
-        $scope.edit = function(x){
-            if(x.id ==null){
+        $scope.jurnal = JurnalService.query();
+        $scope.modalTitle = "Tambah akun";
+        $scope.showCoaDialog = false;
+        $scope.jurnalDetail = [];
+        $scope.selectedItems = [];
+
+        $scope.edit = function(x) {
+            if (x.id == null) {
                 return;
             }
-            $scope.currentJurnal = JurnalService.get({id: x.id}, function(data){
-               $scope.original =angular.copy(data); 
+            $scope.currentJurnal = JurnalService.get({id: x.id}, function(data) {
+                $scope.original = angular.copy(data);
             });
-            JurnalService.jurnalDetail(x).success(function(data){
-               $scope.jurnalDetail= data; 
+            JurnalService.jurnalDetail(x).success(function(data) {
+                $scope.jurnalDetail = data;
             });
         };
-        
-        $scope.addItem = function(x){
-            $scope.jurnalDetail.splice(1, 0, { 
-                    akun:{accNo:'', accName:''},
-                    debet: 0, 
-                    kredit : 0
+
+        $scope.addItem = function(x) {
+            $scope.jurnalDetail.splice(1, 0, {
+                akun: {accNo: '', accName: ''},
+                debet: 0,
+                kredit: 0
             });
+        };
+        $scope.addItem2 = function(x) {
+            console.log(x);
+            $scope.jurnalDetail.push({
+                akun: {
+                    accName: x.accName,
+                    accNo: x.accNo
+
+                },
+                debet: 0.0,
+                kredit: 0.0
+            });
+            console.log($scope.jurnalDetail);
+//            $scope.jurnalDetail.splice(1, $scope.jurnalDetail.lengh - 1, {
+//                akun: {accNo: x.accNo, accName: x.accName},
+//                debet: 0,
+//                kredit: 0
+//            });
+            $scope.showCoaDialog = false;
+        };
+
+        $scope.tambahCoa = function() {
+            $scope.showCoaDialog = true;
+        };
+
+        $scope.cancelSelectedCoa = function() {
+            $scope.showCoaDialog = false;
+        };
+
+        var calculateTotals = function() {
+            var debet = 0;
+            var kredit = 0;
+            for (var i = 0, len = $scope.jurnalDetail.length; i < len; i++) {
+                debet = debet + $scope.jurnalDetail[i].debet;
+                kredit = kredit + $scope.jurnalDetail[i].kredit;
+            }
+            $scope.totalDebet = debet;
+            $scope.totalKredit = kredit;
+        };
+        $scope.$watch('jurnalDetail', calculateTotals, true);
+
+
+        $scope.gridOptions = {
+            data: 'jurnalDetail',
+            enableCellSelection: true,
+            enableRowSelection: false,
+            enableCellEditOnFocus: true,
+            multiSelect: false,
+            selectedItems: $scope.mySelections,
+            columnDefs: [
+                {field: 'akun.accNo', displayName: 'Kode', enableCellEdit: false, width: 100},
+                {field: 'akun.accName', displayName: 'Keterangan', enableCellEdit: false, width: 300},
+                {field: 'debet', displayName: 'Debet', enableCellEdit: true, width: 100, cellFilter: 'numbers',
+                    cellTemplate: '<div ng-class="{green: row.getProperty(col.field) > 30}"><div style="text-align:right;"  class="ngCellText">{{row.getProperty(col.field)}}</div></div>'},
+                {field: 'kredit', displayName: 'Kredit', enableCellEdit: true, width: 100, cellFilter: 'numbers',
+                    cellTemplate: '<div ng-class="{green: row.getProperty(col.field) > 30}"><div style="text-align:right;"  class="ngCellText">{{row.getProperty(col.field)}}</div></div>'}
+                //,cellTemplate: 'pages/transaksi/cellTemplates.html'}
+            ],
         };
     }])
         ;

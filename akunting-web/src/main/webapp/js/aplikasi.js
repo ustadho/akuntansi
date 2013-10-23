@@ -1,4 +1,4 @@
-angular.module('belajar', ['$strap.directives', 'ui', 'xeditable', 'belajar.controller'])
+angular.module('belajar', ['$strap.directives', 'ui', 'xeditable', 'ngGrid', 'belajar.controller'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {templateUrl: 'pages/home.html'})
@@ -12,6 +12,7 @@ angular.module('belajar', ['$strap.directives', 'ui', 'xeditable', 'belajar.cont
             .when('/master/coa', {templateUrl: 'pages/master/coa-list.html', controller: 'CoaController'})
             .when('/master/test', {templateUrl: 'pages/master/test.html', controller: 'CoaController'})
             .when('/transaksi/jurnal', {templateUrl: 'pages/transaksi/jurnal.html', controller: 'JurnalController'})
+            .when('/transaksi/test', {templateUrl: 'pages/transaksi/test-ng-grid.html', controller: 'JurnalController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});
     }])
