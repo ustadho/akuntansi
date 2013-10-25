@@ -1,4 +1,4 @@
-angular.module('belajar', ['$strap.directives', 'ui', 'xeditable', 'ngGrid', 'belajar.controller'])
+angular.module('belajar', ['$strap.directives', 'ui', 'xeditable', 'ngGrid', 'smartTable.table', 'belajar.controller'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {templateUrl: 'pages/home.html'})
@@ -10,9 +10,9 @@ angular.module('belajar', ['$strap.directives', 'ui', 'xeditable', 'ngGrid', 'be
             .when('/system/permission', {templateUrl: 'pages/system/permission.html', controller: 'PermissionController'})
             .when('/system/menu', {templateUrl: 'pages/system/menu.html', controller: 'SystemMenuController'})
             .when('/master/coa', {templateUrl: 'pages/master/coa-list.html', controller: 'CoaController'})
-            .when('/master/test', {templateUrl: 'pages/master/test.html', controller: 'CoaController'})
+            .when('/master/test', {templateUrl: 'pages/master/jurnal2.html', controller: 'CoaController'})
             .when('/transaksi/jurnal', {templateUrl: 'pages/transaksi/jurnal.html', controller: 'JurnalController'})
-            .when('/transaksi/test', {templateUrl: 'pages/transaksi/test-ng-grid.html', controller: 'JurnalController'})
+            .when('/transaksi/jurnal2', {templateUrl: 'pages/transaksi/test-ng-grid.html', controller: 'JurnalController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});
     }])

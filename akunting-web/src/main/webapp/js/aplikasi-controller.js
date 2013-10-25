@@ -523,6 +523,9 @@ angular.module('belajar.controller', ['belajar.service'])
 //            if ($scope.currentCoa != null && $scope.currentCoa.accNo != null) {
 //                return true;
 //            }
+            if(value===''){
+                return true;
+            }
             for (var i = 0; i < $scope.allCoa.length; i++) {
                 var u = $scope.allCoa[i];
                 if (u.accName === value) {
@@ -545,15 +548,16 @@ angular.module('belajar.controller', ['belajar.service'])
 
         CoaService.listAll().success(function(data) {
             $scope.allCoa = data;
+            
         });
-
+        
         $scope.datepicker = {date: new Date()};
         $scope.jurnal = JurnalService.query();
         $scope.modalTitle = "Tambah akun";
         $scope.showCoaDialog = false;
         $scope.jurnalDetail = [];
         $scope.selectedItems = [];
-
+        
         $scope.edit = function(x) {
             if (x.id == null) {
                 return;
@@ -565,32 +569,31 @@ angular.module('belajar.controller', ['belajar.service'])
                 $scope.jurnalDetail = data;
             });
         };
-
-        $scope.addItem = function(x) {
-            $scope.jurnalDetail.splice(1, 0, {
-                akun: {accNo: '', accName: ''},
-                debet: 0,
-                kredit: 0
-            });
-        };
+        $scope.rowCollection = $scope.jurnalDetail;
         $scope.addItem2 = function(x) {
-            console.log(x);
             $scope.jurnalDetail.push({
                 akun: {
                     accName: x.accName,
                     accNo: x.accNo
-
                 },
-                debet: 0.0,
-                kredit: 0.0
+                debet: 0,
+                kredit: 0
             });
-            console.log($scope.jurnalDetail);
-//            $scope.jurnalDetail.splice(1, $scope.jurnalDetail.lengh - 1, {
-//                akun: {accNo: x.accNo, accName: x.accName},
-//                debet: 0,
-//                kredit: 0
-//            });
             $scope.showCoaDialog = false;
+        };
+
+        $scope.columnCollection = [
+            {label: 'AccNo', map: 'akun.accNo'},
+            {label: 'Acc Name', map: 'akun.accName'},
+            {label: 'Debet', map: 'debet', formatFunction: 'currency', isEditable: true, type: 'number', cellClass: 'text-align: right'},
+            {label: 'Kredit', map: 'kredit', formatFunction: 'currency', isEditable: true, type: 'number'},
+            {label: 'Action'}
+        ];
+
+        $scope.globalConfig = {
+            isPaginationEnabled: false,
+            itemsByPage: 1000,
+            maxSize: 8
         };
 
         $scope.tambahCoa = function() {
@@ -601,18 +604,43 @@ angular.module('belajar.controller', ['belajar.service'])
             $scope.showCoaDialog = false;
         };
 
+        $scope.isClean = function() {
+            return angular.equals($scope.original, $scope.currentJurnal) || $scope.jurnalDetail.length==0 
+            || ($scope.totalDebet == 0 || $scope.totalDebet!=$scope.totalKredit) ;
+        };
+        
+        $scope.simpan = function() {
+            console.log($scope.jurnalDetail);
+            for (var i = 0; i < $scope.jurnalDetail.length; i++) {
+                var p = {id: $scope.jurnalDetail[i]};
+                $scope.currentRole.permissionSet.push(p);
+            }
+            JurnalService.save($scope.currentRole)
+                    .success(function() {
+                RoleService.unselectedPermission($scope.currentRole)
+                        .success(function(data) {
+                    $scope.unselectedPermission = data;
+                    $scope.currentRole = RoleService.get({
+                        id: $scope.currentRole.id
+                    });
+                });
+            });
+            $scope.showPermissionDialog = false;
+        };
+        
         var calculateTotals = function() {
             var debet = 0;
             var kredit = 0;
             for (var i = 0, len = $scope.jurnalDetail.length; i < len; i++) {
-                debet = debet + $scope.jurnalDetail[i].debet;
-                kredit = kredit + $scope.jurnalDetail[i].kredit;
+                debet += parseFloat($scope.jurnalDetail[i].debet);
+                kredit += parseFloat($scope.jurnalDetail[i].kredit);
             }
             $scope.totalDebet = debet;
             $scope.totalKredit = kredit;
+            
+            //console.log($scope.jurnalDetail)
         };
         $scope.$watch('jurnalDetail', calculateTotals, true);
-
 
         $scope.gridOptions = {
             data: 'jurnalDetail',
@@ -621,11 +649,11 @@ angular.module('belajar.controller', ['belajar.service'])
             enableCellEditOnFocus: true,
             multiSelect: false,
             selectedItems: $scope.mySelections,
+            enableCellEdit: true,
             columnDefs: [
                 {field: 'akun.accNo', displayName: 'Kode', enableCellEdit: false, width: 100},
                 {field: 'akun.accName', displayName: 'Keterangan', enableCellEdit: false, width: 300},
-                {field: 'debet', displayName: 'Debet', enableCellEdit: true, width: 100, cellFilter: 'numbers',
-                    cellTemplate: '<div ng-class="{green: row.getProperty(col.field) > 30}"><div style="text-align:right;"  class="ngCellText">{{row.getProperty(col.field)}}</div></div>'},
+                {field: 'debet', displayName: 'Debet', enableCellEdit: true, width: 100},
                 {field: 'kredit', displayName: 'Kredit', enableCellEdit: true, width: 100, cellFilter: 'numbers',
                     cellTemplate: '<div ng-class="{green: row.getProperty(col.field) > 30}"><div style="text-align:right;"  class="ngCellText">{{row.getProperty(col.field)}}</div></div>'}
                 //,cellTemplate: 'pages/transaksi/cellTemplates.html'}
