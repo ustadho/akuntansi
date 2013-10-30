@@ -109,7 +109,9 @@ angular.module('belajar.service', ['ngResource'])
             get: function(param, callback){ return this.user.get(param, callback) }, 
             query: function(){ return this.user.query() },
             save: function(obj){
+                console.log(obj);
                 if(obj.id == null){
+                    console.log(obj);
                     return $http.post('user', obj);
                 } else {
                     return $http.put('user/'+obj.id, obj);
@@ -181,17 +183,18 @@ angular.module('belajar.service', ['ngResource'])
             }),
             get: function(param, callback){ return this.jurnal.get(param, callback) }, 
             query: function(p, callback){ return this.jurnal.queryPage({"page.page": p, "page.size": 10}, callback) },
-            save: function(obj, oldAccNo){
-                console.log(oldAccNo);
-                if(oldAccNo == null ){
+            save: function(obj){
+                console.log('Simpan jurnal :');
+                console.log(obj);
+                if(obj.id == null ){
                     return $http.post('jurnal', obj);
                 } else {
-                    return $http.put('jurnal/'+oldAccNo, obj);
+                    return $http.put('jurnal/'+obj.id, obj);
                 }
             }, 
             remove: function(obj){
                 if(obj.accNo != null){
-                    return $http.delete('jurnal/'+obj.accNo);
+                    return $http.delete('jurnal/'+obj.id);
                 }
             }, 
             listAll: function(){

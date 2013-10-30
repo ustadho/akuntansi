@@ -1,8 +1,8 @@
 package com.safira.akunting.ui.controller;
 
+import com.safira.akunting.domain.AccCoa;
 import com.safira.akunting.domain.AccJurnal;
 import com.safira.akunting.domain.AccJurnalDetail;
-import com.safira.akunting.domain.Role;
 import com.safira.akunting.service.AccJurnalRestfulService;
 import java.net.URI;
 import java.util.List;
@@ -80,6 +80,7 @@ public class AccJurnalController {
         URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, x.getId());
         response.setHeader("Location", uri.toASCIIString());
     }
+    
     @RequestMapping(value = "/jurnal-detail", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void createJurnalDetail(@RequestBody @Valid AccJurnalDetail x, HttpServletRequest request, HttpServletResponse response) {

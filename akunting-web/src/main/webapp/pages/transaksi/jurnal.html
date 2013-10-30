@@ -15,10 +15,10 @@
                 <div class="control-group">
                     <label for="inputDatepicker" class="control-label" style="margin-left:6px;">Tanggal : &nbsp; </label>
                     <div class="controls">
-                        <input id="inputDatepicker" class="input-small" type="text" ng-model="datepicker.date" data-date-format="dd/mm/yyyy" bs-datepicker>
+                        <input id="inputDatepicker" class="input-small" type="text" ng-model="currentJurnal.tanggal" data-date-format="dd/mm/yyyy" bs-datepicker>
                         <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
                         &nbsp;&nbsp;
-                        <input type="checkbox" id="optionsCheckbox2" value="option1" >
+                        <input type="checkbox" ng-model="currentJurnal.multiCurr" id="optionsCheckbox2" value="option1" >
                         Multi Currency
                     </div>
                 </div>

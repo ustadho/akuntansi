@@ -34,7 +34,12 @@ public class JurnalResftfulServiceImpl implements AccJurnalRestfulService{
     
     @Override
     public void save(AccJurnal j) {
-        accJurnalDao.save(j).getId();
+        List<AccJurnalDetail> det=j.getListJurnal();
+        for(int i=0; i<det.size(); i++){
+            det.get(i).setJurnal(j);
+        }
+        j.setListJurnal(det);
+        accJurnalDao.save(j);
     }
 
     @Override

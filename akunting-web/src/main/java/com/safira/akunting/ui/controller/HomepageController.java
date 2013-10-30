@@ -51,6 +51,8 @@ public class HomepageController {
                     = belajarRestfulService.findUserByUsername(u.getUsername());
                 if(ux != null || ux.getRole() != null || ux.getRole().getName() != null) {
                     hasil.put("group", ux.getRole().getName());
+                    hasil.put("id", ux.getId());
+                    hasil.put("username", ux.getUsername());
                 } else {
                     hasil.put("group", "undefined");
                 }

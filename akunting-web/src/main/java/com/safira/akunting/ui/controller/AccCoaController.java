@@ -4,8 +4,8 @@
  */
 package com.safira.akunting.ui.controller;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.safira.akunting.domain.AccCoa;
-import com.safira.akunting.domain.Menu;
 import com.safira.akunting.service.MasterRestfulService;
 import java.net.URI;
 import java.util.List;
@@ -87,7 +87,7 @@ public class AccCoaController {
         return masterRestfulService.findAllCoa(pageable);
 
     }
-    
+    @JsonUnwrapped
     @RequestMapping("/coa/all")
     @ResponseBody
     public List<AccCoa> findAllCoaList() {

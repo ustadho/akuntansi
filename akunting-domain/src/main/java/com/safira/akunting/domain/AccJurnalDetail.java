@@ -4,14 +4,17 @@
  */
 package com.safira.akunting.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -26,10 +29,13 @@ public class AccJurnalDetail {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
     
-    @ManyToOne
-    @JoinColumn(name = "jurnal_id")
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "jurnal_id", nullable = false)
+    @JsonBackReference
     private AccJurnal jurnal;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "acc_no")
     private AccCoa akun;

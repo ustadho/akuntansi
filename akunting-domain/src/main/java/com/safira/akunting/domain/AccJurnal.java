@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -59,11 +60,11 @@ public class AccJurnal {
     @Column(name = "date_ins", nullable = false, insertable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date dateIns=new Date();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
-    @OneToMany(mappedBy = "jurnal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "jurnal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<AccJurnalDetail> listJurnal=new ArrayList<AccJurnalDetail>();
 
     public String getId() {
