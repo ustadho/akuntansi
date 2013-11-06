@@ -34,7 +34,7 @@ public class AccGroup {
     
     @Column(name = "group_name", length = 30)
     private String groupName;
-
+    
     public String getTypeId() {
         return typeId;
     }
@@ -74,6 +74,14 @@ public class AccGroup {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+//    public List<AccCoa> getDaftarCoa() {
+//        return daftarCoa;
+//    }
+//
+//    public void setDaftarCoa(List<AccCoa> daftarCoa) {
+//        this.daftarCoa = daftarCoa;
+//    }
  
     
 }

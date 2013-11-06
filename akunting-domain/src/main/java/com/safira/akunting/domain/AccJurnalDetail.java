@@ -4,11 +4,9 @@
  */
 package com.safira.akunting.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,15 +28,17 @@ public class AccJurnalDetail {
     private String id;
     
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "jurnal_id", nullable = false)
-    @JsonBackReference
-    private AccJurnal jurnal;
+    @ManyToOne 
+    @JoinColumn(name = "acc_no", nullable = false)
+    //@JsonBackReference
+    private AccCoa akun;
     
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "acc_no")
-    private AccCoa akun;
+    @JoinColumn(name = "jurnal_id", nullable = false)
+    //@JsonBackReference
+    private AccJurnal jurnal;
+    
     
     private BigDecimal debet=new BigDecimal(BigInteger.ZERO);
     private BigDecimal kredit =new BigDecimal(BigInteger.ZERO);;

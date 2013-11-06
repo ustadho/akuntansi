@@ -10,12 +10,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +39,7 @@ public class AccJurnal {
     @NotNull
     @NotEmpty
     @Column(name = "journal_no", nullable = false)
+    @OrderBy(value = "journalNo")
     private String journalNo;
 
     @Temporal(TemporalType.DATE)
@@ -60,11 +61,12 @@ public class AccJurnal {
     @Column(name = "date_ins", nullable = false, insertable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date dateIns=new Date();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
-    @OneToMany(mappedBy = "jurnal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jurnal", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JsonManagedReference
     private List<AccJurnalDetail> listJurnal=new ArrayList<AccJurnalDetail>();
 
     public String getId() {

@@ -4,6 +4,8 @@
  */
 package com.safira.akunting.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,6 +48,7 @@ public class AccCoa {
     
     @ManyToOne
     @JoinColumn(name = "acc_type", nullable = false)
+//    @JsonBackReference
     private AccGroup accGroup;
     
     private Boolean active;
@@ -82,10 +85,6 @@ public class AccCoa {
     @Column(name = "acc_groups")
     private String accGroups;
     
-    @OneToMany (mappedBy = "akun", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @OrderBy("id")
-    private List<AccJurnalDetail> daftarJurnal=new ArrayList<AccJurnalDetail>();
-//    
     public String getAccNo() {
         return accNo;
     }
@@ -207,13 +206,13 @@ public class AccCoa {
     }
 
 //    @XmlTransient
-    public List<AccJurnalDetail> getDaftarJurnal() {
-        return daftarJurnal;
-    }
-
-    public void setDaftarJurnal(List<AccJurnalDetail> daftarJurnal) {
-        this.daftarJurnal = daftarJurnal;
-    }
+//    public List<AccJurnalDetail> getDaftarJurnal() {
+//        return daftarJurnal;
+//    }
+//
+//    public void setDaftarJurnal(List<AccJurnalDetail> daftarJurnal) {
+//        this.daftarJurnal = daftarJurnal;
+//    }
     
     
 }

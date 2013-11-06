@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,6 @@ public class AccCoaController {
     @RequestMapping(value = "/coa", method = RequestMethod.GET)
     @ResponseBody
     public Page<AccCoa> findAll(Pageable pageable) {
-        
         return masterRestfulService.findAllCoa(pageable);
 
     }
@@ -91,7 +91,12 @@ public class AccCoaController {
     @RequestMapping("/coa/all")
     @ResponseBody
     public List<AccCoa> findAllCoaList() {
-        return masterRestfulService.listAllCoa();
+        List<AccCoa> hasil=masterRestfulService.listAllCoa();
+        Hibernate.initialize(hasil);
+//        for(int i=0; i<hasil.size(); i++){
+//            Hibernate.initialize(hasil.get(i).getDaftarJurnal());
+//        }
+        return hasil;
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

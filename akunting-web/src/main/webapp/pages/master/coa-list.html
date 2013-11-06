@@ -86,8 +86,9 @@
             </div>
             <div class="control-group"  ng-class="{error: formEdit.accName.$invalid}">
                 <label class="control-label" for="accName">Keterangan : &nbsp;</label>
-                <input type="text" id="accName" name="accName" placeholder="Keterangan Akun" ng-model="currentCoa.accName" 
+                <input type="text" width="600" id="accName" name="accName" placeholder="Keterangan Akun" ng-model="currentCoa.accName" 
                        required ui-validate="{accNameAvailable: isAccNameAvailable}">
+                
                 <span ng-show="formEdit.accName.$error.required" class="help-inline">Harus diisi</span>
                 <span ng-show="formEdit.accName.$error.accNameAvailable" class="help-inline">Sudah dipakai</span>
             </div>
@@ -106,7 +107,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a class="btn" ng-click="baru()">Batal</a>
+        <a class="btn" ng-click="cancelSelectedCoa()">Batal</a>
         <a class="btn btn-primary" ng-click="simpan()"  ng-disabled="isClean() || formEdit.$invalid">Simpan</a>
     </div>
 </div>

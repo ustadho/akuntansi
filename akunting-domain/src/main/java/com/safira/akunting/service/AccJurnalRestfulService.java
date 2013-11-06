@@ -6,6 +6,7 @@ package com.safira.akunting.service;
 
 import com.safira.akunting.domain.AccJurnal;
 import com.safira.akunting.domain.AccJurnalDetail;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,12 +21,5 @@ public interface AccJurnalRestfulService extends MonitoredService{
     Page<AccJurnal> findAllJournal(Pageable pageable);
     Long countAllJurnal();
     AccJurnal findJurnalById(Integer id);
-    
-    void save(AccJurnalDetail d);
-    void delete(AccJurnalDetail d);
-    Page<AccJurnalDetail> findAllJurnalDetail(Pageable pageable);
-    Long countAllJurnalDetail();
-    AccJurnalDetail findJurnalDetailById(String id);
-
-    public List<AccJurnalDetail> findJurnalDetailByJurnalId(Integer id);
+    List<AccJurnal> filterJurnalPerTanggal(Date mulai, Date sampai, Pageable pageable);
 }

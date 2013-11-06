@@ -9,6 +9,7 @@ import com.safira.akunting.dao.AccJurnalDetailDao;
 import com.safira.akunting.domain.AccJurnal;
 import com.safira.akunting.domain.AccJurnalDetail;
 import com.safira.akunting.service.AccJurnalRestfulService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -64,43 +65,12 @@ public class JurnalResftfulServiceImpl implements AccJurnalRestfulService{
     }
 
     @Override
-    public void save(AccJurnalDetail d) {
-        accJurnalDetailDao.save(d);
-    }
-
-    @Override
-    public void delete(AccJurnalDetail d) {
-        if(d==null || d.getId()==null){
-            return;
-        }
-        accJurnalDetailDao.delete(d);
-    }
-
-    @Override
-    public Page<AccJurnalDetail> findAllJurnalDetail(Pageable pageable) {
-        if(pageable ==null){
-            pageable=new PageRequest(0, 20);
-        }
-        return accJurnalDetailDao.findAll(pageable);
-    }
-
-    @Override
-    public Long countAllJurnalDetail() {
-        return accJurnalDetailDao.count();
-    }
-
-    @Override
     public AccJurnal findJurnalById(Integer id) {
         return accJurnalDao.findOne(String.valueOf(id));
     }
 
     @Override
-    public AccJurnalDetail findJurnalDetailById(String id) {
-        return accJurnalDetailDao.findOne(id);
-    }
-
-    @Override
-    public List<AccJurnalDetail> findJurnalDetailByJurnalId(Integer id) {
-        return accJurnalDetailDao.findJurnalDetailByJurnalId(id);
+    public List<AccJurnal> filterJurnalPerTanggal(Date mulai, Date sampai, Pageable pageable) {
+        return accJurnalDao.tampilkanJurnalByTanggal(mulai, sampai, pageable);
     }
 }

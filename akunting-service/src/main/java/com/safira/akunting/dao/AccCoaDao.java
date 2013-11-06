@@ -30,7 +30,9 @@ public interface AccCoaDao extends PagingAndSortingRepository<AccCoa, String>{
 			"or lower(ac.accGroup.typeName) like lower(:search)")
     Long count(@Param("search") String search);
     
-    @Query("from AccCoa ac order by ac.accNo")
+    @Query("select ac from AccCoa ac "
+            //+ "join fetch ac.accGroup "
+            + "order by ac.accNo")
     List<AccCoa> listAll();
     
 }

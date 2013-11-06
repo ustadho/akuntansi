@@ -42,7 +42,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "id_role", nullable = false)
     private Role role;
-
+    
     public String getId() {
         return id;
     }

@@ -8,14 +8,14 @@ import org.springframework.data.repository.query.Param;
 
 public interface MenuDao extends PagingAndSortingRepository<Menu, String> {
 
-    @Query("select m from Menu m " +
-			"where m.parent is null " +
-			"order by m.level, m.order")
+    @Query( "select m from Menu m " +
+            "where m.parent is null " +
+            "order by m.level, m.order")
     public List<Menu> findTopLevelMenu();
 
     @Query("select m from Menu m " +
-			"where m.parent.id = :id " +
-			"order by m.level, m.order")
+            "where m.parent.id = :id " +
+            "order by m.level, m.order")
     public List<Menu> findMenuByParent(@Param("id") String id);
 
     public List<Menu> findByIdNotIn(List<String> ids);

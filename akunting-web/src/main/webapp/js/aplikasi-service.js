@@ -182,7 +182,10 @@ angular.module('belajar.service', ['ngResource'])
                 queryPage: {method:'GET', isArray: false}
             }),
             get: function(param, callback){ return this.jurnal.get(param, callback) }, 
-            query: function(p, callback){ return this.jurnal.queryPage({"page.page": p, "page.size": 10}, callback) },
+            query: function(p, callback){ 
+                
+                return this.jurnal.queryPage({"page.page": p, "page.size": 10}, callback) 
+            },
             save: function(obj){
                 console.log('Simpan jurnal :');
                 console.log(obj);

@@ -1,0 +1,58 @@
+<div>
+    <div class="box-content" id="jurnal-list">
+
+        <table class="table table-striped table-bordered" id="example">
+            <thead>
+                <tr>
+                    <th>No. Jurnal</th>
+                    <th>Tanggal</th>
+                    <th>Keterangan</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>   
+            <tbody>
+                <tr ng-repeat="j in jurnalPage.content | orderBy:journalNo">
+                    <td>{{j.journalNo}}</td>
+                    <td>{{j.tanggal}}</td>
+                    <td>{{j.description}}</td>
+                    <td>0</td>
+                    <td class="center">
+                        <a >
+                            <i class="icon-zoom-in"></i>  
+                            View                                            
+                        </a>
+                        <a ng-click="edit(j)">
+                            <i class="icon-edit"></i>  
+                            Edit                                            
+                        </a>
+                        <a ng-click="remove(j)">
+                            <i class="icon-trash"></i> 
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li><a ng-click="reloadJurnalPage(1)">First</a></li>
+            <li ng-class="{disabled: jurnalPage.firstPage}">
+                <a ng-click="reloadJurnalPage(jurnalPage.number - 1)">
+                    Prev
+                </a>
+            </li>
+            <li ng-repeat="p in pages">
+                <a ng-click="reloadJurnalPage(p)">{{p}}</a>
+            </li>
+            <li ng-class="{disabled: jurnalPage.lastPage}">
+                <a ng-click="reloadJurnalPage(coaPage.number + 1)">
+                    Next
+                </a>
+            </li>
+            <li><a ng-click="reloadJurnalPage(pages.length)">Last</a></li>
+        </ul>
+    </div>
+</div>

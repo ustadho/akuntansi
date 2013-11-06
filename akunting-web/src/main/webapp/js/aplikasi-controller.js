@@ -501,6 +501,8 @@ angular.module('belajar.controller', ['belajar.service'])
                 $scope.reloadCoaPage();
             });
         };
+        
+        
         $scope.isClean = function() {
             return angular.equals($scope.original, $scope.currentCoa);
         }
@@ -513,7 +515,7 @@ angular.module('belajar.controller', ['belajar.service'])
             for (var i = 0; i < $scope.allCoa.length; i++) {
                 var u = $scope.allCoa[i];
                 //console.log("AccNo: " + u.accNo);
-                if (u.accNo === value) {
+                if (u.accNo === value && u.accNo !=$scope.oldAccNo) {
                     return false;
                 }
             }
@@ -528,7 +530,7 @@ angular.module('belajar.controller', ['belajar.service'])
             }
             for (var i = 0; i < $scope.allCoa.length; i++) {
                 var u = $scope.allCoa[i];
-                if (u.accName === value) {
+                if (u.accName === value && u.accNo !=$scope.oldAccNo) {
                     return false;
                 }
             }
@@ -545,9 +547,7 @@ angular.module('belajar.controller', ['belajar.service'])
         .controller('JurnalController', ['$http', '$scope', 'JurnalService', 'CoaService', 'UserService',
     function($http, $scope, JurnalService, CoaService, UserService) {
         // Datepicker directive
-        CoaService.listAll().success(function(data) {
-            $scope.allCoa = data;
-        });
+        
         
 //        $scope.datepicker = {date: new Date()};
         //$scope.jurnal = JurnalService.query();
@@ -555,18 +555,38 @@ angular.module('belajar.controller', ['belajar.service'])
         $scope.showCoaDialog = false;
         $scope.jurnalDetail = [];
         $scope.selectedItems = [];
+        
         $http.get('homepage/userinfo').success(function(data) {
             $scope.userinfo = data;
             $scope.getUser = UserService.get({id: $scope.userinfo.id}, function(data) {
                 $scope.currentUser = angular.copy(data);
-                console.log($scope.currentUser);
+                //console.log($scope.currentUser);
             });
         });
         
+        CoaService.listAll().success(function(data) {
+            $scope.allCoa = data;
+        });
+        
+        $scope.reloadJurnalPage = function(page) {
+            if (!page) {
+                page = 0;
+            }
+            console.log("Masuk sini!");
+            $scope.jurnalPage = JurnalService.query(page, function() {
+                $scope.pages = _.range(1, ($scope.jurnalPage.totalPages + 1));
+            });
+        };
+        
+        $scope.reloadJurnalPage();
         $scope.baru = function() {
-            $scope.jurnalDetail = [];
+            $scope.jurnalDetail = null;
             $scope.original = null;
-            $scope.currentJurnal = null;
+            $scope.currentJurnal = [];
+            $scope.showCoaDialog = false;
+        };
+        
+        $scope.cancel = function(){
             $scope.showCoaDialog = false;
         };
         
@@ -584,10 +604,10 @@ angular.module('belajar.controller', ['belajar.service'])
         $scope.rowCollection = $scope.jurnalDetail;
         $scope.addItem2 = function(x) {
             $scope.jurnalDetail.push({
-                akun: {
-                    accName: x.accName,
-                    accNo: x.accNo
-                },
+                akun: x, //{
+                    //accName: x.accName,
+                    //accNo: x.accNo,
+                //},
                 debet: 0,
                 kredit: 0
             });
@@ -630,21 +650,22 @@ angular.module('belajar.controller', ['belajar.service'])
             
             JurnalService.save($scope.currentJurnal)
                     .success(function() {
-                $scope.jurnal=JurnalService.query();
+                //$scope.jurnal=JurnalService.query();
                 $scope.baru();
             });
 //            $scope.showPermissionDialog = false;
         };
         
         var calculateTotals = function() {
-            var debet = 0;
-            var kredit = 0;
-            for (var i = 0, len = $scope.jurnalDetail.length; i < len; i++) {
-                debet += parseFloat($scope.jurnalDetail[i].debet);
-                kredit += parseFloat($scope.jurnalDetail[i].kredit);
+            $scope.totalDebet = 0;
+            $scope.totalKredit = 0;
+            if($scope.jurnalDetail ==null){
+                return;
             }
-            $scope.totalDebet = debet;
-            $scope.totalKredit = kredit;
+            for (var i = 0, len = $scope.jurnalDetail.length; i < len; i++) {
+                $scope.totalDebet += parseFloat($scope.jurnalDetail[i].debet);
+                $scope.totalKredit += parseFloat($scope.jurnalDetail[i].kredit);
+            }
             
             //console.log($scope.jurnalDetail)
         };
@@ -663,9 +684,8 @@ angular.module('belajar.controller', ['belajar.service'])
                 {field: 'akun.accName', displayName: 'Keterangan', enableCellEdit: false, width: 300},
                 {field: 'debet', displayName: 'Debet', enableCellEdit: true, width: 100},
                 {field: 'kredit', displayName: 'Kredit', enableCellEdit: true, width: 100, cellFilter: 'numbers',
-                    cellTemplate: '<divmarsmenganti\n\
- ng-class="{green: row.getProperty(col.field) > 30}"><div style="text-align:right;"  class="ngCellText">{{row.getProperty(col.field)}}</div></div>'}
-                //,cellTemplate: 'pages/transaksi/cellTemplates.html'}
+                    cellTemplate: '<div ng-class="{green: row.getProperty(col.field) > 30}"><div style="text-align:right;"  class="ngCellText">{{row.getProperty(col.field)}}</div></div>'},
+                {field: '', cellTemplate: '<a ng-click="remove(c)"><i class="icon-trash"></i> Delete </a>'}
             ],
         };
     }])
