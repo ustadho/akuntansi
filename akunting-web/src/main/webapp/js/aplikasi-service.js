@@ -178,13 +178,13 @@ angular.module('belajar.service', ['ngResource'])
     }])
     .factory('JurnalService', ['$resource', '$http', function($resource, $http){
         var service = {
-            jurnal: $resource('jurnal/:id', {}, {
-                queryPage: {method:'GET', isArray: false}
+            jurnal: $resource('/jurnal/:id/:mulai/:sampai', {}, {
+                queryPage: {method:'GET', isArray: false},
             }),
             get: function(param, callback){ return this.jurnal.get(param, callback) }, 
-            query: function(p, callback){ 
-                
-                return this.jurnal.queryPage({"page.page": p, "page.size": 10}, callback) 
+            query: function(tanggal, p, callback){ 
+                return this.jurnal.queryPage({"mulai":tanggal.mulai, "sampai":tanggal.sampai, 
+                    "page.page": p, "page.size": 10}, callback) 
             },
             save: function(obj){
                 console.log('Simpan jurnal :');
@@ -199,9 +199,6 @@ angular.module('belajar.service', ['ngResource'])
                 if(obj.accNo != null){
                     return $http.delete('jurnal/'+obj.id);
                 }
-            }, 
-            listAll: function(){
-                return $http.get('jurnal/all');
             }
         };
         return service;

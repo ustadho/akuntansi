@@ -20,6 +20,8 @@ public interface AccJurnalRestfulService extends MonitoredService{
     void delete(AccJurnal j);
     Page<AccJurnal> findAllJournal(Pageable pageable);
     Long countAllJurnal();
-    AccJurnal findJurnalById(Integer id);
-    List<AccJurnal> filterJurnalPerTanggal(Date mulai, Date sampai, Pageable pageable);
+    AccJurnal findJurnalById(String id);
+    Page<AccJurnal> filterJurnalPerTanggal(Date mulai, Date sampai, Pageable pageable);
+    List<AccJurnalDetail> getDetail(String id);
+    
 }

@@ -1,3 +1,9 @@
+<div class="form-search">
+    Tanggal : <input id="inputDatepicker" class="input-small" type="text" ng-model="tanggal.mulai" data-date-format="dd/mm/yyyy" bs-datepicker>
+    Sampai : <input id="inputDatepicker" class="input-small" type="text" ng-model="tanggal.sampai" data-date-format="dd/mm/yyyy" bs-datepicker>
+    <button type="button" class="btn btn-primary" ng-click="reloadJurnalPage(1)" >Tampilkan</button>
+    <button type="button" class="btn" ng-click="baru()">Batal</button>
+</div>
 <div>
     <div class="box-content" id="jurnal-list">
 

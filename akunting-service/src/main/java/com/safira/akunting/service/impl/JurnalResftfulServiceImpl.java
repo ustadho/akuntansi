@@ -65,12 +65,18 @@ public class JurnalResftfulServiceImpl implements AccJurnalRestfulService{
     }
 
     @Override
-    public AccJurnal findJurnalById(Integer id) {
-        return accJurnalDao.findOne(String.valueOf(id));
+    public AccJurnal findJurnalById(String id) {
+        return accJurnalDao.findOne(id);
     }
 
     @Override
-    public List<AccJurnal> filterJurnalPerTanggal(Date mulai, Date sampai, Pageable pageable) {
+    public Page<AccJurnal> filterJurnalPerTanggal(Date mulai, Date sampai, Pageable pageable) {
         return accJurnalDao.tampilkanJurnalByTanggal(mulai, sampai, pageable);
     }
+
+    @Override
+    public List<AccJurnalDetail> getDetail(String id) {
+        return accJurnalDao.getDetail(id);
+    }
+    
 }

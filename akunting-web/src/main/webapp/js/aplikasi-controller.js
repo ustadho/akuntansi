@@ -548,13 +548,13 @@ angular.module('belajar.controller', ['belajar.service'])
     function($http, $scope, JurnalService, CoaService, UserService) {
         // Datepicker directive
         
-        
-//        $scope.datepicker = {date: new Date()};
-        //$scope.jurnal = JurnalService.query();
         $scope.modalTitle = "Tambah akun";
         $scope.showCoaDialog = false;
         $scope.jurnalDetail = [];
         $scope.selectedItems = [];
+        $scope.tanggal = [];
+        $scope.tanggal.mulai= new Date();
+        $scope.tanggal.sampai = new Date();
         
         $http.get('homepage/userinfo').success(function(data) {
             $scope.userinfo = data;
@@ -572,17 +572,17 @@ angular.module('belajar.controller', ['belajar.service'])
             if (!page) {
                 page = 0;
             }
-            console.log("Masuk sini!");
-            $scope.jurnalPage = JurnalService.query(page, function() {
+            $scope.jurnalPage = JurnalService.query($scope.tanggal, page, function() {
                 $scope.pages = _.range(1, ($scope.jurnalPage.totalPages + 1));
+                
             });
         };
         
         $scope.reloadJurnalPage();
         $scope.baru = function() {
-            $scope.jurnalDetail = null;
+            $scope.jurnalDetail = [];
             $scope.original = null;
-            $scope.currentJurnal = [];
+            $scope.currentJurnal = null;
             $scope.showCoaDialog = false;
         };
         
@@ -596,9 +596,7 @@ angular.module('belajar.controller', ['belajar.service'])
             }
             $scope.currentJurnal = JurnalService.get({id: x.id}, function(data) {
                 $scope.original = angular.copy(data);
-            });
-            JurnalService.jurnalDetail(x).success(function(data) {
-                $scope.jurnalDetail = data;
+                console.log($scope.original);
             });
         };
         $scope.rowCollection = $scope.jurnalDetail;

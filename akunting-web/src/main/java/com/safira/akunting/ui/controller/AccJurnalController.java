@@ -36,12 +36,16 @@ public class AccJurnalController {
 
     @RequestMapping("/jurnal/{id}")
     @ResponseBody
-    public AccJurnal findById(@PathVariable Integer id) {
+    public AccJurnal findById(@PathVariable String id) {
         AccJurnal x = jurnalRestfulService.findJurnalById(id);
         if (x == null) {
             throw new IllegalStateException();
         }
-        x.setListJurnal(null);
+        List<AccJurnalDetail> det=jurnalRestfulService.getDetail(id);
+        for(AccJurnalDetail d: det){
+            fixLie(d.getJurnal().getUser());
+        }
+        x.setListJurnal(det);
         fixLie(x.getUser());
         
         return x;
@@ -58,11 +62,11 @@ public class AccJurnalController {
         return x;
     }
     
-    @RequestMapping("/jurnal-filter/{mulai}/{sampai}")
+    @RequestMapping(value = "/jurnal/{mulai}/{sampai}", method = RequestMethod.GET)
     @ResponseBody
-    public List<AccJurnal> filterJurnalPerTanggal(
+    public Page<AccJurnal> filterJurnalPerTanggal(
             @PathVariable Date mulai, @PathVariable Date sampai, Pageable pageable) {
-        List<AccJurnal> x = jurnalRestfulService.filterJurnalPerTanggal(mulai, sampai, pageable);
+        Page<AccJurnal> x = jurnalRestfulService.filterJurnalPerTanggal(mulai, sampai, pageable);
         if (x == null) {
             throw new IllegalStateException();
         }
@@ -85,7 +89,7 @@ public class AccJurnalController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/jurnal/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable Integer id, @RequestBody @Valid AccJurnal x) {
+    public void update(@PathVariable String id, @RequestBody @Valid AccJurnal x) {
         AccJurnal a = jurnalRestfulService.findJurnalById(id);
         if (a == null) {
             logger.warn("Role dengan id [{}] tidak ditemukan", id);
@@ -97,7 +101,7 @@ public class AccJurnalController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/jurnal/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable String id) {
         AccJurnal a = jurnalRestfulService.findJurnalById(id);
         if (a == null) {
             logger.warn("Role dengan id [{}] tidak ditemukan", id);
