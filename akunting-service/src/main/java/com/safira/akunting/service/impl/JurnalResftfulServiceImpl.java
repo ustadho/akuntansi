@@ -66,7 +66,8 @@ public class JurnalResftfulServiceImpl implements AccJurnalRestfulService{
 
     @Override
     public AccJurnal findJurnalById(String id) {
-        return accJurnalDao.findOne(id);
+        //return accJurnalDao.findOne(id);
+        return accJurnalDao.getJurnalById(id);
     }
 
     @Override
@@ -74,9 +75,5 @@ public class JurnalResftfulServiceImpl implements AccJurnalRestfulService{
         return accJurnalDao.tampilkanJurnalByTanggal(mulai, sampai, pageable);
     }
 
-    @Override
-    public List<AccJurnalDetail> getDetail(String id) {
-        return accJurnalDao.getDetail(id);
-    }
     
 }

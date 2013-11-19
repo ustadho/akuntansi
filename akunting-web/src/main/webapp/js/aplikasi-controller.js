@@ -17,7 +17,7 @@ angular.module('belajar.controller', ['belajar.service'])
         .controller('ApplicationSessionsController', ['ApplicationSessionsService', '$scope', function(ApplicationSessionsService, $scope) {
         $scope.refresh = function() {
             ApplicationSessionsService.list().success(function(data) {
-                $scope.sessioninfo = data
+                $scope.sessioninfo = data;
             });
         }
 
@@ -544,8 +544,8 @@ angular.module('belajar.controller', ['belajar.service'])
         }
         $scope.showCoaDialog = false;
     }])
-        .controller('JurnalController', ['$http', '$scope', 'JurnalService', 'CoaService', 'UserService',
-    function($http, $scope, JurnalService, CoaService, UserService) {
+        .controller('JurnalController', ['$http', '$scope',  '$location', 'JurnalService', 'CoaService', 'UserService',
+    function($http, $scope, $location, JurnalService, CoaService, UserService) {
         // Datepicker directive
         
         $scope.modalTitle = "Tambah akun";
@@ -594,9 +594,13 @@ angular.module('belajar.controller', ['belajar.service'])
             if (x.id == null) {
                 return;
             }
+            
             $scope.currentJurnal = JurnalService.get({id: x.id}, function(data) {
                 $scope.original = angular.copy(data);
-                console.log($scope.original);
+                //$routeProvider.otherwise({templateUrl: 'pages/transaksi/jurnal.html', controller: 'JurnalController'});
+                $location.path('/transaksi/jurnal');
+                $scope.currentJurnal =angular.copy(data);
+                console.log($scope.currentJurnal);
             });
         };
         $scope.rowCollection = $scope.jurnalDetail;

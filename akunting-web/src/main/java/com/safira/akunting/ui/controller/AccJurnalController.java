@@ -1,6 +1,5 @@
 package com.safira.akunting.ui.controller;
 
-import com.safira.akunting.domain.AccCoa;
 import com.safira.akunting.domain.AccJurnal;
 import com.safira.akunting.domain.AccJurnalDetail;
 import com.safira.akunting.domain.User;
@@ -41,12 +40,16 @@ public class AccJurnalController {
         if (x == null) {
             throw new IllegalStateException();
         }
-        List<AccJurnalDetail> det=jurnalRestfulService.getDetail(id);
-        for(AccJurnalDetail d: det){
-            fixLie(d.getJurnal().getUser());
+//        List<AccJurnalDetail> det=jurnalRestfulService.getDetail(id);
+        for(AccJurnalDetail j: x.getListJurnal()){
+            System.out.println("JurnalID: "+j.getId());
+            j.setJurnal(null);
+            
         }
-        x.setListJurnal(det);
+//        x.setListJurnal(det);
+        
         fixLie(x.getUser());
+        
         
         return x;
     }

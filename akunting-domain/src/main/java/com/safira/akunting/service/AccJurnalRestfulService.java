@@ -22,6 +22,5 @@ public interface AccJurnalRestfulService extends MonitoredService{
     Long countAllJurnal();
     AccJurnal findJurnalById(String id);
     Page<AccJurnal> filterJurnalPerTanggal(Date mulai, Date sampai, Pageable pageable);
-    List<AccJurnalDetail> getDetail(String id);
     
 }

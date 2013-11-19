@@ -12,6 +12,7 @@ angular.module('belajar', ['$strap.directives', 'ui', 'smartTable.table', 'belaj
             .when('/master/coa', {templateUrl: 'pages/master/coa-list.html', controller: 'CoaController'})
             .when('/master/test', {templateUrl: 'pages/master/jurnal2.html', controller: 'CoaController'})
             .when('/transaksi/jurnal', {templateUrl: 'pages/transaksi/jurnal.html', controller: 'JurnalController'})
+            .when('/transaksi/edit-jurnal/:id', {templateUrl: 'pages/transaksi/jurnal.html', controller: 'JurnalController'})
             .when('/transaksi/jurnal-list', {templateUrl: 'pages/transaksi/jurnal-list.html', controller: 'JurnalController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});

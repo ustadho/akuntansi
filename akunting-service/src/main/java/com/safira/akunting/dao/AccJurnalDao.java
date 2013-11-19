@@ -32,5 +32,9 @@ public interface AccJurnalDao extends PagingAndSortingRepository<AccJurnal, Stri
             + "where d.jurnal.id=:id ")
     public List<AccJurnalDetail> getDetail(@Param("id") String id);
     
-    
+    @Query("select j from AccJurnal j "
+            + "join fetch j.listJurnal d "
+            + "join fetch d.akun coa "
+            + "where j.id=:id")
+    public AccJurnal getJurnalById(@Param("id") String id);
 }
