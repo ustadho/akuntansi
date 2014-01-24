@@ -10,25 +10,32 @@
         </div>
         <div>
             <a class="btn btn-primary" ng-click="baru()"><i class="icon-plus icon-white"></i> Tambah</a>
+            
+            <input type="text" ng-model="search" placeholder="Pencarian" class="search-query" />
+            <a class="btn btn-setting" ng-click="reloadCoaPage(1)"><i class="icon-search"></i> Search</a>
         </div>
         <div class="box-content" id="coa-list">
 
-            <table class="table table-striped table-bordered" id="example">
+            <table class="table table-striped table-bordered table-hover" id="example">
                 <thead>
                     <tr>
-                        <th>No. Akun</th>
-                        <th>Keterangan</th>
-                        <th>Tipe</th>
-                        <th>Groups</th>
+                        <th>Nomor</th>
+                        <th>Nama</th>
+                        <th>Kantor</th>
+                        <th>Jenis</th>
+                        <th>Mata Uang</th>
+                        <th>Kelompok Anggaran</th>
                         <th>Actions</th>
                     </tr>
                 </thead>   
                 <tbody>
-                    <tr ng-repeat="c in coaPage.content | orderBy:accNo">
+                    <tr ng-repeat="c in coaPage.content| orderBy:accNo">
                         <td>{{c.accNo}}</td>
                         <td>{{c.accName}}</td>
-                        <td>{{c.accGroup.typeName}}</td>
-                        <td>{{c.accGroup.groupName}}</td>
+                        <td>{{c.office.id}}</td>
+                        <td>{{c.accType.typeId}}</td>
+                        <td>{{c.currency.id}}</td>
+                        <td>{{c.kelompokAnggaran| checkmark}}</td>
                         <td class="center">
                             <a >
                                 <i class="icon-zoom-in"></i>  
@@ -66,17 +73,22 @@
                 </li>
                 <li><a ng-click="reloadCoaPage(pages.length)">Last</a></li>
             </ul>
+            {{coaPage.number}}
         </div>
     </div>
 </div>
 <div ui-modal class="fade" ng-model="showCoaDialog" id="dialogCoa">
     <div class="modal-header">
-        <button type="button" class="close" ng-click="showCoaDialog=false">×</button>
+        <button type="button" class="close" ng-click="showCoaDialog = false">×</button>
         <h3>{{modalTitle}}</h3>
     </div>
 
-    <div class="modal-body">
+    <div class="modal-body ">
         <form class="form-horizontal" name="formEdit">
+            <div class="control-group">
+                <label class="control-label" for="active">Aktif : &nbsp;</label>
+                <input type="checkbox" id="active" name="active" placeholder="Active" ng-model="currentCoa.active">
+            </div>
             <div class="control-group" ng-class="{error: formEdit.accNo.$invalid}">
                 <label class="control-label" for="accNo">Acc No: &nbsp;</label>
                 <td><input type="text" id="accNo" name="accNo" placeholder="No. Akun" 
@@ -86,23 +98,31 @@
             </div>
             <div class="control-group"  ng-class="{error: formEdit.accName.$invalid}">
                 <label class="control-label" for="accName">Keterangan : &nbsp;</label>
-                <input type="text" width="600" id="accName" name="accName" placeholder="Keterangan Akun" ng-model="currentCoa.accName" 
+                <input type="text" style="width: 300px" id="accName" name="accName" placeholder="Keterangan Akun" ng-model="currentCoa.accName" 
                        required ui-validate="{accNameAvailable: isAccNameAvailable}">
-                
+
                 <span ng-show="formEdit.accName.$error.required" class="help-inline">Harus diisi</span>
                 <span ng-show="formEdit.accName.$error.accNameAvailable" class="help-inline">Sudah dipakai</span>
             </div>
-            <div class="control-group" ng-class="{error: formEdit.typeId.$invalid}">
+            <div class="control-group"  ng-class="{error: formEdit.officeId.$invalid}">
+                <label class="control-label" for="officeId">Kantor : &nbsp;</label>
+                <select ui-select2 ng-model="currentCoa.office.id" data-placeholder="-- Pilih Kantor --" style="width: 200px">
+                    <option></option>
+                    <option ng-repeat="o in office" value="{{o.id}}">{{o.name}}</option>
+                </select>
+                <span ng-show="formEdit.officeId.$error.required" class="help-inline">Harus diisi</span>
+            </div>
+            <div class="control-group"  ng-class="{error: formEdit.typeId.$invalid}">
                 <label class="control-label" for="typeId">Tipe : &nbsp;</label>
-                <select ui-select2 ng-model="currentCoa.accGroup.typeId" data-placeholder="-- Select One --" width="200">
+                <select ui-select2 ng-model="currentCoa.accType.typeId" data-placeholder="-- Pilih Jenis Coa --" style="width: 200px">
                     <option></option>
                     <option ng-repeat="t in accType" value="{{t.typeId}}">{{t.typeName}}</option>
                 </select>
                 <span ng-show="formEdit.typeId.$error.required" class="help-inline">Harus diisi</span>
             </div>
             <div class="control-group">
-                <label class="control-label" for="active">Aktif</label>
-                <input type="checkbox" id="active" name="active" placeholder="Active" ng-model="currentCoa.active">
+                <label class="control-label" for="isBudget">Kelompok Anggaran : &nbsp;</label>
+                <input type="checkbox" id="isBudget" name="isBudget" placeholder="Active" ng-model="currentCoa.isBudget">
             </div>
         </form>
     </div>

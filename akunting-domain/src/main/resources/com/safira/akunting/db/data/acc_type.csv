@@ -1,0 +1,23 @@
+type_id,type_name,group_name
+AP,Account Payable,PASIVA
+AT,Aktifa,AKTIVA
+BY,Biaya,BEBAN
+CB,Cash/ Bank,AKTIVA
+CC,Credit Card,AKTIVA
+CD,Debit Card,AKTIVA
+CG,Cheque/ Giro Masuk,AKTIVA
+CO,Cheque/ Giro Keluar,AKTIVA
+CS,COST,BEBAN
+CT,Cash Tunai,AKTIVA
+DI,Deposit - In,PASIVA
+DO,Deposit - Out,PASIVA
+DP,Depresiasi,AKTIVA
+HD,Hutang Domestik,PASIVA
+IC,Income,PENDAPATAN
+IS,Income Selisih,PENDAPATAN
+MD,Modal,MODAL
+PD,Piutang Dagang,PASIVA
+PL,Hutang Lancar,PASIVA
+SL,Penjualan,PENDAPATAN
+TC,Traveler Cheque,AKTIVA
+TL,Deposit Lain,PASIVA

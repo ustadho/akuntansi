@@ -1,0 +1,17 @@
+id, name,country_name,exchange_rate, active
+,,,1,true
+AED,,,1,true
+AUD,,,1,true
+BND,,,1,true
+EUR,Euro,,1,true
+HKD,,,1,true
+IDR,Rupiah,Indonesia,1,true
+JPY,,,1,true
+KRW,,,1,true
+MYR,,,1,true
+SAR,,,1,true
+SGD,,,1,true
+TRY,,,1,true
+TWD,,,1,true
+USD,,,1,true
+YUA,,,1,true

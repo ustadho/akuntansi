@@ -190,8 +190,20 @@
 	
     </changeSet>
     <changeSet id="4" author="ustadho">
-	<createTable tableName="acc_group">
-		<column name="type_id" type="varchar(2)">
+	<createTable tableName="c_office">
+		<column name="id" type="varchar(3)">
+			<constraints primaryKey="true" nullable="false"/>
+		</column>
+		<column name="name" type="varchar(100)">
+		        <constraints nullable="false" />
+	    	</column>
+	</createTable>
+	<loadData tableName="c_office" file="com/safira/akunting/db/data/acc_office.csv">
+            <column header="id" type="STRING"/>
+            <column header="name" type="STRING"/>
+        </loadData>
+	<createTable tableName="acc_type">
+		<column name="type_id" type="varchar(3)">
 			<constraints primaryKey="true" nullable="false"/>
 		</column>
 		<column name="type_name" type="varchar(100)">
@@ -201,13 +213,60 @@
 		<column name="group_id" type="varchar(1)" />
 		<column name="group_name" type="varchar(30)"/>
 	</createTable>
-	<loadData tableName="acc_group" file="com/safira/akunting/db/data/acc_group.csv">
+	<loadData tableName="acc_type" file="com/safira/akunting/db/data/acc_type.csv">
             <column header="type_id" type="STRING"/>
             <column header="type_name" type="STRING"/>
-            <column header="catatan" type="STRING"/>
-            <column header="group_id" type="STRING"/>
             <column header="group_name" type="STRING"/>
         </loadData>
-
+        <createTable tableName="acc_currency">
+		<column name="id" type="varchar(5)">
+			<constraints primaryKey="true" nullable="false"/>
+		</column>
+		<column name="name" type="varchar(50)" />
+		<column name="exchange_rate" type="bigint">
+		        <constraints nullable="false" />
+	    	</column>
+		<column name="country_name" type="varchar(100)"/>
+		<column name="symbol" type="varchar(5)" />
+                <column name="active" type="boolean" />
+	</createTable>
+	<loadData tableName="acc_currency" file="com/safira/akunting/db/data/acc_currency.csv">
+            <column header="id" type="STRING"/>
+            <column header="name" type="STRING"/>
+            <column header="country_name" type="STRING"/>
+        </loadData>
+        
+        <createTable tableName="acc_coa">
+		<column name="acc_no" type="varchar(15)">
+			<constraints primaryKey="true" nullable="false"/>
+		</column>
+		<column name="acc_name" type="varchar(100)"/>
+		<column name="office_id" type="varchar(3)" />
+		<column name="type_id" type="varchar(3)" />
+		<column name="currency_id" type="varchar(5)" />
+		<column name="is_budget" type="boolean" />
+		<column name="active" type="boolean" />
+	</createTable>
+	<loadData tableName="acc_coa" file="com/safira/akunting/db/data/acc_coa.csv" >
+            <column header="acc_no" type="STRING"/>
+            <column header="acc_name" type="STRING"/>
+            <column header="office_id" type="STRING"/>
+            <column header="type_id" type="STRING"/>
+            <column header="currency_id" type="STRING"/>
+            <column header="is_budget" type="BOOLEAN"/>
+            <column header="active" type="BOOLEAN"/>
+        </loadData>
+<!--        <createTable tableName="acc_coa_currency">
+		<column name="acc_no" type="varchar(15)">
+			<constraints primaryKey="true" nullable="false"/>
+		</column>
+		<column name="currency_name" type="varchar(5)">
+			<constraints primaryKey="true" nullable="false"/>
+		</column>
+	</createTable>
+	<loadData tableName="acc_coa_currency" file="com/safira/akunting/db/data/acc_coa_currency.csv" >
+            <column header="acc_no" type="STRING"/>
+            <column header="currency" type="STRING"/>
+        </loadData>-->
     </changeSet>
 </databaseChangeLog>

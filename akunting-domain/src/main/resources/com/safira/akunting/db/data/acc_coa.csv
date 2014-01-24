@@ -1,0 +1,389 @@
+acc_no,acc_name,office_id,type_id,is_budget,active,currency_id
+100000,Modal,All,MD,false,true,
+100100,Laba/Rugi Ditahan,All,MD,false,true,
+100200,Laba/Rugi Tahun Berjalan,All,MD,false,true,
+200000,Inventaris Gedung,All,AT,false,true,
+200001,Tanah,All,AT,false,true,IDR
+200002,Gedung,All,AT,false,true,IDR
+200003,Kendaraan,All,AT,false,true,IDR
+200010,Inventaris Kendaraan Bermotor,All,AT,false,true,
+200020,Inventaris Perlengkapan Kantor,All,AT,false,true,
+200030,Inventaris Peralatan Kantor,All,AT,false,true,
+210000,Akumulasi Penyusutan Gedung,All,AP,false,true,
+210010,Akumulasi Penyusutan Kendaraan Bermotor,All,AP,false,true,
+210020,Akumulasi Penyusutan Perlengkapan Kantor,All,AP,false,true,
+210030,Akumulasi Penyusutan Peralatan Kantor,All,AP,false,true,
+300000,Kas Tunai IDR JBC,All,CT,true,true,IDR
+300001,Kas Tunai USD JBC,All,CT,false,true,USD
+300002,Kas Tunai SGD GP,All,CT,false,true,SGD
+300003,Kas Tunai SAR JBC,All,CT,true,true,SAR
+300004,Kas Tunai MYR GP,All,CT,false,true,MYR
+300005,Kas Tunai NTD (Taiwan) GP,All,CT,true,true,TWD
+300006,Kas Tunai HKD GP,All,CT,false,true,HKD
+300007,Kas Tunai YEN GP,All,CT,false,true,JPY
+300008,Kas Tunai EUR GP,All,CT,false,true,EUR
+300009,Kas Tunai BND GP,All,CT,false,true,BND
+300010,Kas Tunai AUD GP,All,CT,false,true,AUD
+300011,Kas Tunai IDR GP,All,CT,true,true,IDR
+300012,Kas Tunai USD GP,All,CT,true,true,USD
+300013,Kas Tunai SAR GP,All,CT,true,true,SAR
+300014,Kas Tunai TRY GP,All,CT,false,true,TRY
+300015,Kas Tunai YUA GP,All,CT,false,true,YUA
+300016,Petty Cash GP,All,CT,false,true,IDR
+300017,Petty Cash JBC,All,CT,false,true,IDR
+300018,Petty Cash Kantor Oprls Jakarta,All,CT,false,true,IDR
+300019,Kas Tunai SGD JBC,All,CT,true,true,SGD
+300020,Kas Tunai DIRHAM JBC,All,CT,false,true,AED
+300021,Kas Tunai DIRHAM GP,All,CT,false,true,AED
+300022,Kas Tunai WON (KRW) GP,All,CT,false,true,KRW
+300023,Kas Tunai WON (KRW) JBC,All,CT,false,true,KRW
+300024,Kas Tunai LIRA JBC,All,CT,false,true,TRY
+300025,Kas Tunai BND JBC,All,CT,false,true,BND
+300026,Kas Tunai MYR JBC,All,CT,false,true,MYR
+300101,Traveler Cheque USD,All,TC,false,false,USD
+301000,Bank BCA IDR 088-382381-5,All,CB,false,true,IDR
+301001,Bank BCA USD,All,CB,false,true,USD
+301002,Bank BCA SGD,All,CB,false,true,SGD
+301010,Bank Mandiri IDR 142-00-0333000.7,All,CB,false,true,IDR
+301011,Bank Mandiri USD 142-00-999000.2,All,CB,false,true,USD
+301012,Bank NISP IDR 05513033300-0,All,CB,false,true,IDR
+301013,Bank BNI SYARIAH USD 0827330008,All,CB,false,true,USD
+301014,Bank HSBC USD,All,CB,false,true,USD
+301016,Bank HSBC IDR,All,CB,false,true,IDR
+301017,Bank BNI USD,All,CB,false,true,USD
+301018,Bank NISP IDR 360 156,All,CB,false,true,IDR
+301019,Bank NISP IDR 360 149,All,CB,false,true,IDR
+301020,Bank BNI BU LULU IDR 0184045724,All,CB,false,true,IDR
+301022,Bank Mandiri USD LULU 142-00-0540368-7,All,CB,false,true,USD
+301023,Bank Mandiri USD 142-00-0482748-0,All,CB,false,true,USD
+301024,Bank BNI IDR 8857758857,All,CB,false,true,IDR
+301025,Bank Mandiri IDR Bu Lulu 142-00-0541946-9,All,CB,false,true,IDR
+301026,Bank Mandiri USD LULU 142-00-0540368-7,All,CB,false,false,USD
+301027,Bank Mandiri IDR 368 7,All,CB,false,false,IDR
+301028,Bank Mandiri IDR 777 0000,All,CB,false,true,IDR
+301029,Bank Mandiri IDR 142-00-8888833-3,All,CB,false,true,IDR
+301030,Bank Muamalat IDR Tab,All,CB,false,true,IDR
+301031,Bank HSBC IDR 753,All,CB,false,true,IDR
+301032,CITY BANK USD,All,CB,false,true,USD
+301033,Bank Muamalat USD GIRO,All,CB,false,true,USD
+301034,Bank HSBC USD 115,All,CB,false,true,USD
+301036,Bank BTPN 0460 000 2738,All,CB,false,true,IDR
+301037,Bank Syariah Mandiri JBC IDR - 212345678-8,All,CB,true,true,IDR
+301038,Bank Syariah Mandiri JBC USD - 211223344-2,All,CB,true,true,USD
+301039,Bank Permata Syariah - 4107.55.30.40,All,CB,true,true,IDR
+301040,Bank BRI AGRO,All,CB,true,true,IDR
+301041,Bank Permata Syariah - 2932072567,All,CB,false,true,IDR
+301042,Bank BTN,All,CB,false,true,IDR
+301043,Bank CMB Niaga,All,CB,false,true,IDR
+301044,Bank Jatim Bangkalan 105-21-00000,All,CB,true,true,IDR
+302000,Cheque/Giro Masuk,All,CG,false,true,IDR
+303000,Cheque/Giro Keluar BCA IDR,All,CO,false,true,IDR
+304000,Credit Card Merchant BCA,All,CC,false,true,IDR
+305000,Debit Card Merchant BCA,All,CD,false,true,IDR
+305001,Debit Card Marchant Bank Mandiri,All,CD,false,true,IDR
+305002,Debit Card Marchant Bank Permata Syariah,All,CD,false,true,IDR
+306000,Surat-Surat Berharga IDR,All,CB,false,true,IDR
+306001,Surat-surat Berharga USD - Mega Capital,All,TL,false,true,USD
+310000,Piutang Usaha,All,PD,false,true,IDR
+310010,Piutang Dagang Transisi,All,TL,false,true,
+310011,Piutang Dagang Transisi USD,All,PD,true,true,USD
+310020,Piutang Refund Transisi,All,TL,false,true,
+310021,Piutang Pegawai,All,TL,false,true,IDR
+310022,Piutang Pihak Hub. Istimewa,All,PD,false,true,IDR
+310024,Piutang Pihak ke-tiga,All,TL,false,true,USD
+310030,Persediaan Perlengkapan Umroh & Haji,All,TL,true,true,IDR
+31023,Piutang Pegawai,All,TL,false,false,IDR
+321000,Deposit Ke Airline - Ticket Dom,All,DO,false,true,
+321500,Deposit Ke Airline - Ticket Intrue,All,DO,false,true,
+321600,Deposit Ke Airline - Top Up JT Lion,All,TL,false,true,IDR
+321601,Deposit Ke Airline - Top Up Y6 Batavia,All,TL,false,true,IDR
+321602,Deposit Ke Airline - Top Up SJ Sriwijaya,All,TL,false,true,IDR
+321603,Deposit Ke air line - Top Up Merpati,All,TL,true,true,IDR
+321604,Deposit Ke air line - Top Up Citylink,All,TL,true,true,IDR
+321605,Deposit Ke Air Line - Top Up Air Asia,All,TL,true,true,IDR
+322000,Deposit Ke Hotel - Hotel Dom,All,DO,false,true,
+322500,Deposit Ke Hotel - Hotel Intrue,All,DO,false,true,
+323000,Deposit Ke Travel Agent - Tour Dom,All,DO,false,true,
+323500,Deposit Ke Travel Agent - Tour Intrue,All,DO,false,true,
+324000,Deposit Ke Supplier - Passportrue,All,DO,false,true,
+324001,Deposit Ke Supplier - Visa,All,DO,false,true,
+325000,Deposit Ke Supplier - Lain Lain,All,DO,false,true,
+326000,U.M Pembayaran Pax Haji Tahun Berjalan,All,DO,false,true,USD
+326001,U.M. Perlengkapan Umroh,All,DO,true,true,IDR
+326002,U.M. Biaya Umroh Plus,All,TL,false,true,USD
+326003,U.M. Biaya Kantor,All,TL,false,true,IDR
+326004,U.M. Biaya Operasional Umroh,All,TL,true,true,USD
+326005,U.M. Tiket Umroh,All,TL,true,true,USD
+326006,U.M. Biaya Operasional Haji Plus,All,TL,true,true,USD
+326007,U.M. Perlengkapan Haji Plus,All,TL,false,true,IDR
+326008,U.M. Tiket Haji Plus,All,TL,false,true,IDR
+330000,Biaya Dibayar Dimuka - Sewa Kantor,All,TL,false,true,
+340000,Prive,All,TL,false,true,
+390000,Ayat Silang,All,TL,false,true,
+390001,Saldo Transisi,All,TL,false,true,IDR
+401000,Hutang Ticket Domestic,All,HD,false,true,
+401001,Hutang Pihak ke-tiga,All,HD,false,true,IDR
+401500,Hutang Ticket International,All,HD,false,true,
+402000,Hutang Hotel Domestic,All,HD,false,true,
+402500,Hutang Hotel International,All,HD,false,true,
+403000,Hutang Tour Series Domestic,All,HD,false,true,
+403010,Hutang Tour Package Domestic,All,HD,false,true,
+403020,Hutang Tour Only Domestic,All,HD,false,true,
+403030,Hutang Tour Incentive Domestic,All,HD,false,true,
+403100,Hutang Tour Inbound,All,HD,false,true,
+403500,Hutang Tour Series International,All,HD,false,true,
+403510,Hutang Tour Package International,All,HD,false,true,
+403520,Hutang Tour Only International,All,HD,false,true,
+403530,Hutang Tour Incentive International,All,HD,false,true,
+403700,Hutang Business Package Domestic,All,HD,false,true,
+403800,Hutang Business Package International,All,HD,false,true,
+404000,Hutang Travel Passportrue,All,HD,false,true,
+404001,Hutang Travel Visa,All,HD,false,true,
+404005,Hutang Travel Insurance,All,HD,false,true,
+404100,Hutang Umroh,All,HD,false,true,
+404200,Hutang Haji,All,HD,false,true,
+404500,Hutang Car Rental,All,HD,false,true,
+404501,Hutang Bus Rental,All,HD,false,true,
+404550,Hutang Transfer In Airport Hotel,All,HD,false,true,
+404560,Hutang Transfer Out Hotel Airportrue,All,HD,false,true,
+404600,Hutang Train Ticket Domestic,All,HD,false,true,
+404650,Hutang Train Ticket International,All,HD,false,true,
+404701,Hutang Administration Fee,All,HD,false,true,
+404702,Hutang Cruise Domestic,All,HD,false,true,
+404703,Hutang Cruise International,All,HD,false,true,
+404704,Hutang MICE Domestic,All,HD,false,true,
+404705,Hutang MICE International,All,HD,false,true,
+405000,Kewajiban Yang Harus Segera Dibayar Rp,All,PL,false,true,IDR
+405001,Kewajiban Yang Harus Segera Dibayar USD,All,PL,false,true,USD
+405002,Penjualan Umroh Diterima Dimuka,All,HD,true,true,IDR
+405003,Titipan Layanan Haji Tahun Berjalan,All,PL,false,true,USD
+409000,Hutang Miscellaneous Productrue,All,HD,false,true,
+410010,Hutang Dagang Transisi,All,PL,false,true,
+410011,Penjualan Haji Diterima Dimuka,All,HD,true,true,IDR
+410020,Hutang Refund Transisi,All,PL,false,true,
+421000,Deposit Dari Pelanggan - Ticket Dom,All,DI,false,true,
+421500,Deposit Dari Pelanggan - Ticket Intrue,All,DI,false,true,
+422000,Deposit Dari Pelanggan - Hotel Dom,All,DI,false,true,
+422500,Deposit Dari Pelanggan - Hotel Intrue,All,DI,false,true,
+423000,Deposit Dari Pelanggan - Tour Dom,All,DI,false,true,
+423500,Deposit Dari Pelanggan - Tour Intrue,All,DI,false,true,
+424000,Deposit Dari Pelanggan - Passportrue,All,DI,false,true,
+424001,Deposit Dari Pelanggan - Visa,All,DI,false,true,
+425000,Deposit Dari Pelanggan - Lain Lain,All,DI,false,true,
+430000,Hutang Kepada Direksi,All,TL,false,true,
+430100,Hutang Kepada Pihak Ketiga,All,TL,false,true,
+440000,Hutang Incentive - JT Lion,All,PL,false,true,IDR
+440001,Hutang Incentive - Y6 Batavia,All,PL,false,true,IDR
+440002,Hutang Incentive - SJ Sriwijaya,All,PL,false,true,IDR
+491000,Hutang PPN,All,HD,false,true,
+501000,Penjualan Ticket Domestic,All,SL,false,true,IDR
+501001,Penjualan Tiket Domestic,All,SL,false,true,IDR
+501500,Penjualan Ticket International,All,SL,false,true,
+502000,Penjualan Hotel Domestic,All,SL,false,true,
+502500,Penjualan Hotel International,All,SL,false,true,
+502501,Penjualan Tiket International,All,SL,false,true,IDR
+503000,Penjualan Tour Series Domestic,All,SL,false,true,
+503010,Penjualan Tour Package Domestic,All,SL,false,true,
+503020,Penjualan Tour Only Domestic,All,SL,false,true,
+503030,Penjualan Tour Incentive Domestic,All,SL,false,true,
+503100,Penjualan Tour Inbound,All,SL,false,true,
+503500,Penjualan Tour Series International,All,SL,false,true,
+503510,Penjualan Tour Package International,All,SL,false,true,
+503520,Penjualan Tour Only International,All,SL,false,true,
+503530,Penjualan Tour Incentive International,All,SL,false,true,
+503700,Penjualan Business Package Domestic,All,SL,false,true,
+503800,Penjualan Business Package International,All,SL,false,true,
+504000,Penjualan Travel Passportrue,All,SL,false,true,
+504001,Penjualan Travel Visa,All,SL,false,true,
+504005,Penjualan Travel Insurance,All,SL,false,true,
+504006,Penjualan Dokumen,All,SL,true,true,IDR
+504100,Penjualan Umroh,All,SL,false,true,
+504200,Penjualan Haji,All,SL,false,true,
+504500,Penjualan Car Rental,All,SL,false,true,
+504501,Penjualan Bus Rental,All,SL,false,true,
+504502,Penjualan Aktiva Tetap,All,SL,false,true,IDR
+504550,Penjualan Transfer In Airport Hotel,All,SL,false,true,
+504560,Penjualan Transfer Out Hotel Airportrue,All,SL,false,true,
+504600,Penjualan Train Ticket Domestic,All,SL,false,true,
+504650,Penjualan Train Ticket International,All,SL,false,true,
+504701,Penjualan Administration Fee,All,SL,false,true,
+504702,Penjualan Cruise Domestic,All,SL,false,true,
+504703,Penjualan Cruise International,All,SL,false,true,
+504704,Penjualan MICE Domestic,All,SL,false,true,
+504705,Penjualan MICE International,All,SL,false,true,
+509000,Penjualan Miscellaneous Productrue,All,SL,false,true,
+601000,HPP Ticket Domestic,All,CS,false,true,
+601500,HPP Ticket International,All,CS,false,true,
+602000,HPP Hotel Domestic,All,CS,false,true,
+602500,HPP Hotel International,All,CS,false,true,
+603000,HPP Tour Series Domestic,All,CS,false,true,
+603010,HPP Tour Package Domestic,All,CS,false,true,
+603020,HPP Tour Only Domestic,All,CS,false,true,
+603030,HPP Tour Incentive Domestic,All,CS,false,true,
+603100,HPP Tour Inbound,All,CS,false,true,
+603500,HPP Tour Series International,All,CS,false,true,
+603510,HPP Tour Package International,All,CS,false,true,
+603520,HPP Tour Only International,All,CS,false,true,
+603530,HPP Tour Incentive International,All,CS,false,true,
+603700,HPP Business Package Domestic,All,CS,false,true,
+603800,HPP Business Package International,All,CS,false,true,
+604000,HPP Travel Passportrue,All,CS,false,true,
+604001,HPP Travel Visa,All,CS,false,true,
+604005,HPP Travel Insurance,All,CS,false,true,
+604006,HPP Penjualan Dokumen,All,CS,true,true,IDR
+604007,HPP Penjualan Transportasi,All,CS,true,true,IDR
+604008,HPP Handling Tour dan Tiketrue,All,CS,true,true,IDR
+604009,HPP Penjualan Lain-lain,All,CS,true,true,IDR
+604100,HPP Umroh,All,CS,false,true,
+604200,HPP Haji,All,CS,false,true,
+604500,HPP Car Rental,All,CS,false,true,
+604501,HPP Bus Rental,All,CS,false,true,
+604550,HPP Transfer In Airport Hotel,All,CS,false,true,
+604560,HPP Transfer Out Hotel Airportrue,All,CS,false,true,
+604600,HPP Train Ticket Domestic,All,CS,false,true,
+604650,HPP Train Ticket International,All,CS,false,true,
+604701,HPP Administration Fee,All,CS,false,true,
+604702,HPP Cruise Domestic,All,CS,false,true,
+604703,HPP Cruise International,All,CS,false,true,
+604704,HPP MICE Domestic,All,CS,false,true,
+604705,HPP MICE International,All,CS,false,true,
+609000,HPP Miscellaneous Productrue,All,CS,false,true,
+609001,HPP Tiket Umroh,All,CS,true,true,IDR
+609002,HPP Hotel dan Catering Umroh,All,CS,true,true,IDR
+609003,HPP Operasional Umroh,All,CS,true,true,IDR
+609004,HPP Tour Leader (TL) Umroh,All,CS,true,true,IDR
+609005,HPP Manasik Umroh,All,CS,true,true,IDR
+609006,HPP Handling Umroh,All,CS,true,true,IDR
+609007,HPP Handling Umroh,All,CS,false,false,IDR
+609008,HPP Pengurusan Visa Umroh,All,CS,true,true,IDR
+609009,HPP Perlengkapan Umroh,All,CS,true,true,IDR
+609010,HPP Umroh lainnya,All,CS,true,true,IDR
+609011,HPP Tiket Haji,All,CS,true,true,IDR
+609012,HPP Hotel dan Catering Haji,All,CS,true,true,IDR
+609013,HPP Operasional Haji,All,CS,true,true,IDR
+609014,HPP Tour Leader (TL) Haji,All,CS,true,true,IDR
+609015,HPP Manasik Haji,All,CS,true,true,IDR
+609016,HPP Handling Haji,All,CS,true,true,IDR
+609017,HPP Perlengkapan Haji,All,CS,true,true,IDR
+609018,HPP Haji lainnya,All,CS,true,true,IDR
+609019,Discount Penjualan Umroh,All,CS,true,true,IDR
+609020,Discount Penjualan Haji,All,CS,true,true,IDR
+700000,B. Gaji,All,BY,true,true,IDR
+700001,B. Lembur,All,BY,true,true,IDR
+700002,Biaya THR,All,BY,true,true,IDR
+700003,Biaya Bonus,All,BY,true,true,IDR
+700004,Biaya Asuransi Tenaga Kerja,All,BY,true,true,IDR
+700005,Biaya Tunjangan Kesehatan,All,BY,true,true,IDR
+700006,Biaya Jaminan Hari Tua (JHT),All,BY,true,true,IDR
+700007,B. Pendidikan & Training,All,BY,true,true,IDR
+700008,B. Perjalanan Dinas,All,BY,true,true,IDR
+700009,Biaya Transportrue,All,BY,true,true,IDR
+700010,Biaya SDM Lainnya,All,BY,false,true,
+700011,Biaya Penggantian Kaca Mata Pegawai,All,BY,true,true,IDR
+700012,Biaya Rekreasi dan Olah Raga,All,BY,false,true,IDR
+700013,Biaya Penghargaan Direksi dan Pegawai,All,BY,true,true,IDR
+700020,Biaya Komisi Penjualan,All,BY,false,true,IDR
+700021,Biaya Perawatan Pelanggan,All,BY,true,true,IDR
+700022,Biaya Promosi dan Iklan,All,BY,true,true,IDR
+700023,Biaya Pameran,All,BY,true,true,IDR
+700024,Biaya Pustaka Informasi,All,BY,true,true,IDR
+700025,Biaya Pemasaran lainnya,All,BY,true,true,IDR
+700100,"B. Telepon, Facsimile",All,BY,true,true,
+700101,B. Pulsa HP,All,BY,true,true,
+700102,B. Internetrue,All,BY,true,true,
+700103,B. "Bahan Bakar (BBM) & Parkir, Karcis Tol",All,BY,false,true,
+700200,B. Listrik,All,BY,true,true,
+700201,B. Air Minum,All,BY,true,true,
+700202,B. Rumah Tangga Kantor,All,BY,true,true,
+700300,B. Sewa Kantor,All,BY,true,true,
+700400,B. Alat Tulis Kantor,All,BY,true,true,
+700401,B. Materai,All,BY,true,true,
+700402,"B. Pos, Kurir",All,BY,true,true,
+700403,Biaya Pengiriman,All,BY,true,true,IDR
+700404,Biaya Percetakan dan Foto copy,All,BY,true,true,IDR
+700500,B. Perawatan Kantor,All,BY,true,true,IDR
+700501,B. Perawatan Perlengkapan Kantor,All,BY,true,true,
+700502,B. Perawatan Peralatan Kantor,All,BY,true,true,
+700503,B. Perawatan Sistim & Komputer,All,BY,true,true,
+700504,B. Pemeliharaan Kendaraan,All,BY,false,true,
+700505,B. Pemeliharaan Gedung Kantor,All,BY,false,true,
+700506,Biaya Pajak Bumi dan Bangunan,All,BY,true,true,IDR
+700507,Biaya Pajak Reklame,All,BY,true,true,IDR
+700508,Biaya Pajak Kendaraan Bermotor,All,BY,true,true,IDR
+700509,Biaya Pajak Pengalihan Tanah,All,BY,true,true,IDR
+700510,Biaya Sewa Bangunan,All,BY,true,true,IDR
+700511,Biaya Sewa Kendaraan,All,BY,true,true,IDR
+700512,Biaya Sewa Inventaris Kantor,All,BY,true,true,IDR
+700520,Biaya Asuransi Bangunan,All,BY,true,true,IDR
+700521,Biaya Asuransi Cash In Save,All,BY,true,true,IDR
+700522,Biaya Asuransi Kendaraan Bermotor,All,BY,true,true,IDR
+700523,Biaya Asuransi Inventaris Kantor,All,BY,true,true,IDR
+700524,Biaya Asuransi Jiwa dan Kesehatan,All,BY,true,true,IDR
+700530,Biaya Keperluan Kantor Lainnya,All,BY,true,true,IDR
+700531,Biaya Kecelakaan / Santunan Kematian,All,BY,true,true,IDR
+700532,Biaya Pakaian Dinas,All,BY,true,true,IDR
+700533,Biaya Resep dan Obat-obatan,All,BY,true,true,IDR
+700534,Biaya Potongan Card,All,BY,true,true,IDR
+700535,Biaya Rekrutment Pegawai,All,BY,true,true,IDR
+700536,Biaya Konsultan Hukum dan Notaris,All,BY,true,true,IDR
+700537,Biaya Konsultan Manajemen,All,BY,true,true,IDR
+700538,"Biaya Zakatrue, Infaq dan Sadekah (ZIS)",All,BY,true,true,IDR
+700539,Biaya Pembulatan Kas,All,BY,true,true,IDR
+700540,Biaya Rapatrue,All,BY,true,true,IDR
+700541,Biaya Kantor Lainnya,All,BY,true,true,IDR
+700542,Selisih Kas,All,BY,true,true,IDR
+700543,Biaya Handling Haji,All,BY,true,true,IDR
+700544,Biaya Handling Tour Domestik,All,BY,true,true,IDR
+700545,Biaya Handling Tour Internasional,All,BY,true,true,IDR
+700546,Biaya Handling Umroh,All,BY,true,true,IDR
+700547,Biaya Manasik Umroh & Haji,All,BY,true,true,IDR
+700548,Biaya Travel Visa,All,BY,true,true,IDR
+700549,Biaya Penjualan Dokumen,All,BY,true,true,IDR
+700550,Biaya Operasional Umroh,All,BY,true,true,IDR
+700551,Biaya Fee Tour Leader Umroh,All,BY,true,true,IDR
+700552,Biaya Perlengkapan Umroh,All,BY,true,true,IDR
+700553,Biaya Tiket Group Umroh,All,BY,true,true,IDR
+700554,Biaya Hotel Group Umroh,All,BY,true,true,IDR
+700555,Biaya Operasional Haji Plus,All,BY,false,true,IDR
+700556,Biaya Manasik Haji Plus,All,BY,true,true,IDR
+700557,Biaya Perlengkapan Haji Plus,All,BY,false,true,IDR
+700558,Biaya Tiket Haji Tahun Berjalan,All,BY,true,true,IDR
+700559,Biaya Pembimbing Haji Plus,All,BY,true,true,IDR
+700600,B. Operasional Sales & Marketing,All,BY,true,true,
+700601,B. Operasional Umum,All,BY,true,true,
+700602,B. Operasional Managementrue,All,BY,true,true,IDR
+700603,Biaya Komisi Agent Umroh & Haji,All,BY,true,true,IDR
+700700,B. Jasa Profesional,All,BY,true,true,
+700701,B. Pelatihan Pegawai,All,BY,true,true,
+700800,B. Promosi,All,BY,true,true,
+700801,B. Iklan,All,BY,true,true,
+700802,B. Jamuan Pelanggan,All,BY,true,true,
+700803,B. Acara Kantor,All,BY,false,true,IDR
+700900,B. Iuran Lingkungan Kantor,All,BY,true,true,
+700901,B. Iuran Keanggotaan,All,BY,true,true,
+700902,B. Sumbangan Sosial,All,BY,false,true,
+700910,B. Perijinan Usaha & Operasional,All,BY,false,true,IDR
+780000,B. Administrasi & Bunga Bank,All,BY,false,true,
+780001,Biaya Oprls Kantor Perwakilan Jakarta,All,BY,true,true,IDR
+780002,Biaya Up Grade Tiketrue,All,BY,true,true,IDR
+780003,Biaya Refund Tiketrue,All,BY,false,true,IDR
+780010,Biaya Pajak Tahunan/PPh Badan,All,BY,true,true,IDR
+780011,Biaya Pajak Pertambahan Nilai (PPn),All,BY,true,true,IDR
+780015,"Biaya Kecurian, Kehilangan, Kebakaran",All,BY,true,true,IDR
+780016,Biaya Selisih Pembulatan,All,BY,false,true,IDR
+780017,Biaya Selisih Kurs Valuta,All,BY,false,true,
+780020,Biaya lain-lain,All,BY,true,true,IDR
+800000,Penyusutan Gedung,All,DP,false,true,
+800010,Penyusutan Kendaraan Bermotor,All,DP,false,true,
+800020,Penyusutan Perlengkapan Kantor,All,DP,false,true,
+800030,Penyusutan Peralatan Kantor,All,DP,false,true,
+990000,Pendapatan Selisih Kurs,All,IS,false,true,IDR
+990001,Selisih Pembulatan,All,IS,false,true,
+990002,Selisih Kartu Kreditrue,All,IS,false,true,
+990003,Pendapatan Bunga Bank atau Bagi Hasil,All,BY,true,true,IDR
+990004,Pendapatan Penjualan Dokumen,All,IS,false,true,IDR
+991000,Pendapatan Incentive Airline,All,IC,false,true,
+991001,Pendapatan Potonga Refund Tiketrue,All,BY,false,true,IDR
+991100,Pendapatan Incentive Hotel,All,IC,false,true,
+991200,Pendapatan Incentive Tour,All,IC,false,true,
+991300,Pendapatan Lain Lain,All,IC,false,true,

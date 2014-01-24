@@ -150,13 +150,39 @@ angular.module('belajar.service', ['ngResource'])
             
         return service;
     }])
+    .factory('OfficeService', ['$resource', '$http', function($resource, $http){
+            var service ={
+                office: $resource('office/:id'),
+                get: function(param, callback){return this.office.get(param, callback)},
+                query: function(){return this.office.query()},
+                save: function(obj){
+                    if(obj.id==nul){
+                        return $http.post('office', obj);
+                    }else{
+                        return $http.put('office/'+obj.id, obj);
+                    }
+                },
+                remove: function(obj){
+                    if(obj.id !=null){
+                        return $http.delete('office/'+obj.id);
+                    }
+                }
+            };
+            return service;
+    }])
     .factory('CoaService', ['$resource', '$http', function($resource, $http){
         var service = {
-            coa: $resource('coa/:accNo', {}, {
+            coa: $resource('coa/:search', {}, {
                 queryPage: {method:'GET', isArray: false}
             }),
-            get: function(param, callback){ return this.coa.get(param, callback) }, 
-            query: function(p, callback){ return this.coa.queryPage({"page.page": p, "page.size": 10}, callback) },
+            get: function(accNo, callback){
+                console.log(accNo);
+                //return this.coa.get(param.accNo+'/edit', callback) }, 
+                return $http.get('coa/'+accNo+'/edit') ;},
+            query: function(search, p, callback){ 
+                console.log(search);
+                return this.coa.queryPage(
+                {"search":search, "page.page": p, "page.size": 10}, callback) },
             save: function(obj, oldAccNo){
                 console.log(oldAccNo);
                 if(oldAccNo == null ){
@@ -172,7 +198,12 @@ angular.module('belajar.service', ['ngResource'])
             }, 
             listAll: function(){
                 return $http.get('coa/all');
+            },
+            cariSatu: function(acc){
+                return $http.get('coa/find/'+acc);
+                
             }
+
         };
         return service;
     }])

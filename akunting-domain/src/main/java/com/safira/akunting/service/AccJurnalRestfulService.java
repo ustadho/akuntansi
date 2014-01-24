@@ -4,8 +4,8 @@
  */
 package com.safira.akunting.service;
 
-import com.safira.akunting.domain.AccJurnal;
-import com.safira.akunting.domain.AccJurnalDetail;
+import com.safira.akunting.domain.acc.AccJurnal;
+import com.safira.akunting.domain.acc.AccJurnalDetail;
 import java.util.Date;
 import java.util.List;
 import org.springframework.data.domain.Page;

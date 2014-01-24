@@ -57,4 +57,9 @@ angular.module('belajar', ['$strap.directives', 'ui', 'smartTable.table', 'belaj
             });
         };
     })
+.filter('checkmark', function() {
+  return function(input) {
+    return input ? '\u2713' : '\u2718';
+  };
+});
 ;

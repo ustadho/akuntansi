@@ -5,11 +5,13 @@
 package com.safira.akunting.service.impl;
 
 import com.safira.akunting.dao.AccCoaDao;
-import com.safira.akunting.dao.AccGroupDao;
-import com.safira.akunting.dao.ApplicationConfigDao;
-import com.safira.akunting.domain.AccCoa;
-import com.safira.akunting.domain.AccGroup;
-import com.safira.akunting.domain.Role;
+import com.safira.akunting.dao.AccCurrency;
+import com.safira.akunting.dao.AccTypeDao;
+import com.safira.akunting.dao.OfficeDao;
+import com.safira.akunting.domain.acc.Coa;
+import com.safira.akunting.domain.acc.CoaType;
+import com.safira.akunting.domain.acc.Currency;
+import com.safira.akunting.domain.acc.Office;
 import com.safira.akunting.service.MasterRestfulService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,25 +34,28 @@ public class MasterRestfulServiceImpl implements MasterRestfulService{
     private AccCoaDao accCoaDao;
     
     @Autowired
-    private AccGroupDao accGroupDao;
+    private AccTypeDao accTypeDao;
+    
+    @Autowired
+    private OfficeDao officeDao;
     
     @Override
-    public void save(AccCoa coa) {
+    public void save(Coa coa) {
         accCoaDao.save(coa);
     }
 
     @Override
-    public void delete(AccCoa coa) {
+    public void delete(Coa coa) {
         accCoaDao.delete(coa);
     }
 
     @Override
-    public AccCoa findByAccNo(String accNo) {
+    public Coa findByAccNo(String accNo) {
          if(!StringUtils.hasText(accNo)){
             return null;
         }
         
-        AccCoa r = accCoaDao.findOne(accNo);
+        Coa r = accCoaDao.findOne(accNo);
         if(r != null){
 //            r.getPermissionSet().size();
 //            r.getMenuSet().size();
@@ -60,7 +65,7 @@ public class MasterRestfulServiceImpl implements MasterRestfulService{
     }
 
     @Override
-    public Page<AccCoa> findAllCoa(Pageable pageable) {
+    public Page<Coa> findAllCoa(Pageable pageable) {
          if(pageable == null){
             pageable = new PageRequest(0, 20);
         }
@@ -81,7 +86,7 @@ public class MasterRestfulServiceImpl implements MasterRestfulService{
     }
 
     @Override
-    public Page<AccCoa> findCoas(String search, Pageable pageable) {
+    public Page<Coa> findCoas(String search, Pageable pageable) {
         if (!StringUtils.hasText(search)) {
             return findAllCoa(pageable);
         }
@@ -90,51 +95,102 @@ public class MasterRestfulServiceImpl implements MasterRestfulService{
             pageable = new PageRequest(0, 20);
         }
 
-        return accCoaDao.search("%" + search + "%", pageable);
+        return accCoaDao.search("%"+search+"%", pageable);
     }
 
     @Override
-    public void save(AccGroup coa) {
-        accGroupDao.save(coa);
+    public void save(CoaType coa) {
+        accTypeDao.save(coa);
     }
 
     @Override
-    public void delete(AccGroup coa) {
-        accGroupDao.delete(coa);
+    public void delete(CoaType coa) {
+        accTypeDao.delete(coa);
     }
 
     @Override
-    public AccGroup findByTypeId(String typeId) {
-        if(!StringUtils.hasText(typeId)){
-            return null;
-        }
-        
-        AccGroup r = accGroupDao.findOne(typeId);
-        if(r != null){
-//            r.getPermissionSet().size();
-//            r.getMenuSet().size();
-        }
-        
-        return r;
+    public CoaType findByTypeId(String typeId) {
+        return accTypeDao.findOne(typeId);
     }
 
     @Override
-    public Page<AccGroup> findAllAccGroups(Pageable page) {
-         if(page == null){
-            page = new PageRequest(0, 20);
-        }
-        return accGroupDao.findAll(page);
+    public Page<CoaType> findAllAccGroups(Pageable page) {
+        return accTypeDao.findAll(page);
     }
 
     @Override
     public Long countAllAccGroups() {
-        return accGroupDao.count();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<AccCoa> listAllCoa() {
+    public List<Coa> listAllCoa() {
         return accCoaDao.listAll();
     }
 
-    
+    @Override
+    public void save(Currency curr) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Currency curr) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Currency findById(String kode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Page<Currency> findAllCurrency(Pageable page) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Long countAllCurrency() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Long countCurrency(String search) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<CoaType> listAll() {
+        return accTypeDao.listAll();
+    }
+
+    @Override
+    public void save(Office o) {
+        officeDao.save(o);
+    }
+
+    @Override
+    public void delete(Office o) {
+        officeDao.delete(0);
+    }
+
+    @Override
+    public Office findByOfficeId(String id) {
+        return officeDao.findOne(id);
+    }
+
+    @Override
+    public Page<Office> findAllOffice(Pageable page) {
+        return officeDao.findAll(page);
+    }
+
+    @Override
+    public Long countAllOffice() {
+        return officeDao.count();
+    }
+
+    @Override
+    public List<Office> listAllOffice() {
+        return officeDao.listAll();
+    }
+
 }

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.safira.akunting.domain;
+package com.safira.akunting.domain.acc;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -31,7 +31,7 @@ public class AccJurnalDetail {
     @ManyToOne 
     @JoinColumn(name = "acc_no", nullable = false)
     //@JsonBackReference
-    private AccCoa akun;
+    private Coa akun;
     
     @NotNull
     @ManyToOne
@@ -59,11 +59,11 @@ public class AccJurnalDetail {
         this.jurnal = jurnal;
     }
 
-    public AccCoa getAkun() {
+    public Coa getAkun() {
         return akun;
     }
 
-    public void setAkun(AccCoa akun) {
+    public void setAkun(Coa akun) {
         this.akun = akun;
     }
 

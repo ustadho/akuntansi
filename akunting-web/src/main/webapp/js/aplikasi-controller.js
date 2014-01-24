@@ -439,20 +439,24 @@ angular.module('belajar.controller', ['belajar.service'])
             return true;
         }
     }])
-        .controller('CoaController', ['$scope', 'CoaService', 'AccTypeService', function($scope, CoaService, AccTypeService) {
+        .controller('CoaController', ['$scope', 'CoaService', 'AccTypeService', 'OfficeService', 
+                function($scope, CoaService, AccTypeService, OfficeService) {
         $scope.coa = CoaService.query(0, 1000);
         $scope.allCoa = [];
-        $scope.accType = AccTypeService.query();
+        $scope.accType = AccTypeService.query(0, 50);
+        $scope.office = OfficeService.query();
         $scope.unselectedCoa = [];
         $scope.modalTitle = "Tambah COA";
+        $scope.search="";
+        
         $scope.oldAccNo = null;
         $scope.reloadCoaPage = function(page) {
             if (!page) {
                 page = 0;
             }
-
-            $scope.coaPage = CoaService.query(page, function() {
+            $scope.coaPage = CoaService.query($scope.search, page, function() {
                 $scope.pages = _.range(1, ($scope.coaPage.totalPages + 1));
+//                console.log($scope.coaPage);
             });
         };
 
@@ -460,16 +464,17 @@ angular.module('belajar.controller', ['belajar.service'])
             $scope.allCoa = data;
         });
 
-        $scope.reloadCoaPage();
+        
 
         $scope.edit = function(x) {
             if (x.accNo == null) {
                 return;
             }
 
-            console.log(x.accNo);
-            $scope.currentCoa = CoaService.get({accNo: x.accNo}, function(data) {
+            CoaService.get(x.accNo).success(function(data) {
                 $scope.original = angular.copy(data);
+                $scope.currentCoa = angular.copy(data);
+                console.log($scope.original);
                 $scope.modalTitle = "Edit COA";
                 $scope.showCoaDialog = true;
                 $scope.oldAccNo = x.accNo;
@@ -543,6 +548,7 @@ angular.module('belajar.controller', ['belajar.service'])
             $scope.oldAccNo = null;
         }
         $scope.showCoaDialog = false;
+        $scope.reloadCoaPage();
     }])
         .controller('JurnalController', ['$http', '$scope',  '$location', 'JurnalService', 'CoaService', 'UserService',
     function($http, $scope, $location, JurnalService, CoaService, UserService) {
@@ -621,13 +627,13 @@ angular.module('belajar.controller', ['belajar.service'])
             {label: 'Acc Name', map: 'akun.accName'},
             {label: 'Debet', map: 'debet', formatFunction: 'currency', isEditable: true, type: 'number'},
             {label: 'Kredit', map: 'kredit', formatFunction: 'currency', isEditable: true, type: 'number'},
-            {label: 'Action'}
         ];
 
         $scope.globalConfig = {
             isPaginationEnabled: false,
             itemsByPage: 1000,
-            maxSize: 8
+            maxSize: 8, 
+            selectionMode: 'single',
         };
 
         $scope.tambahCoa = function() {

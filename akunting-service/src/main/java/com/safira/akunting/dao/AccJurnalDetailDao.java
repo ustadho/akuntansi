@@ -4,8 +4,7 @@
  */
 package com.safira.akunting.dao;
 
-import com.safira.akunting.domain.AccJurnalDetail;
-import com.safira.akunting.domain.Menu;
+import com.safira.akunting.domain.acc.AccJurnalDetail;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

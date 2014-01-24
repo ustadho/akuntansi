@@ -6,8 +6,8 @@ package com.safira.akunting.service.impl;
 
 import com.safira.akunting.dao.AccJurnalDao;
 import com.safira.akunting.dao.AccJurnalDetailDao;
-import com.safira.akunting.domain.AccJurnal;
-import com.safira.akunting.domain.AccJurnalDetail;
+import com.safira.akunting.domain.acc.AccJurnal;
+import com.safira.akunting.domain.acc.AccJurnalDetail;
 import com.safira.akunting.service.AccJurnalRestfulService;
 import java.util.Date;
 import java.util.List;

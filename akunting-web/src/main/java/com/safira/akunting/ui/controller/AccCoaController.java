@@ -5,7 +5,8 @@
 package com.safira.akunting.ui.controller;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import com.safira.akunting.domain.AccCoa;
+import com.safira.akunting.domain.User;
+import com.safira.akunting.domain.acc.Coa;
 import com.safira.akunting.service.MasterRestfulService;
 import java.net.URI;
 import java.util.List;
@@ -39,19 +40,44 @@ public class AccCoaController {
     MasterRestfulService masterRestfulService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    @RequestMapping("/coa/{accNo}")
+    
+    @RequestMapping(value = "/coa", method = RequestMethod.GET)
     @ResponseBody
-    public AccCoa findById(@PathVariable String accNo) {
-        AccCoa x = masterRestfulService.findByAccNo(accNo);
+    public Page<Coa> findAll(
+            Pageable pageable,
+            HttpServletResponse response) {
+        System.out.println("Test param:"+ pageable);
+       Page<Coa> hasil = masterRestfulService.findAllCoa(pageable);
+
+        return hasil;
+
+    }
+    @RequestMapping(value="/coa/{accNo}/edit", method = RequestMethod.GET)
+    @ResponseBody
+    public Coa findById(@PathVariable String accNo, HttpServletResponse response) {
+        System.out.println("Masuk findById");
+        Coa x = masterRestfulService.findByAccNo(accNo);
         if (x == null) {
             throw new IllegalStateException();
         }
         return x;
     }
     
+    @RequestMapping(value = "/coa/{search}", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<Coa> searchCoa(@PathVariable String search,
+            Pageable pageable,
+            HttpServletResponse response) {
+        System.out.println("Test param:"+ pageable.toString());
+        Page<Coa> hasil = masterRestfulService.findCoas("%"+search+"%", pageable);
+
+        return hasil;
+
+    }
+    
     @RequestMapping(value = "/coa", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody @Valid AccCoa x, HttpServletRequest request, HttpServletResponse response) {
+    public void create(@RequestBody @Valid Coa x, HttpServletRequest request, HttpServletResponse response) {
         masterRestfulService.save(x);
         String requestUrl = request.getRequestURL().toString();
         URI uri = new UriTemplate("{requestUrl}/{accNo}").expand(requestUrl, x.getAccNo());
@@ -60,8 +86,8 @@ public class AccCoaController {
     
     @RequestMapping(method = RequestMethod.PUT, value = "/coa/{accNo}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable String accNo, @RequestBody @Valid AccCoa x) {
-        AccCoa a = masterRestfulService.findByAccNo(accNo);
+    public void update(@PathVariable String accNo, @RequestBody @Valid Coa x) {
+        Coa a = masterRestfulService.findByAccNo(accNo);
         if (a == null) {
             logger.warn("Akun dengan nomor [{}] tidak ditemukan", accNo);
             throw new IllegalStateException();
@@ -73,7 +99,8 @@ public class AccCoaController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/coa/{accNo}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable String accNo) {
-        AccCoa a = masterRestfulService.findByAccNo(accNo);
+        System.out.println("Masuk: /coa/{accNo}");
+        Coa a = masterRestfulService.findByAccNo(accNo);
         if (a == null) {
             logger.warn("Coa dengan accNo [{}] tidak ditemukan", accNo);
             throw new IllegalStateException();
@@ -81,18 +108,14 @@ public class AccCoaController {
         masterRestfulService.delete(a);
     }
 
-    @RequestMapping(value = "/coa", method = RequestMethod.GET)
-    @ResponseBody
-    public Page<AccCoa> findAll(Pageable pageable) {
-        return masterRestfulService.findAllCoa(pageable);
-
-    }
+    
+    
     @JsonUnwrapped
     @RequestMapping("/coa/all")
     @ResponseBody
-    public List<AccCoa> findAllCoaList() {
-        List<AccCoa> hasil=masterRestfulService.listAllCoa();
-        Hibernate.initialize(hasil);
+    public List<Coa> findAllCoaList() {
+        List<Coa> hasil=masterRestfulService.listAllCoa();
+//        Hibernate.initialize(hasil);
 //        for(int i=0; i<hasil.size(); i++){
 //            Hibernate.initialize(hasil.get(i).getDaftarJurnal());
 //        }
@@ -104,4 +127,5 @@ public class AccCoaController {
     public void handle() {
         logger.debug("Resource dengan URI tersebut tidak ditemukan");
     }
+    
 }

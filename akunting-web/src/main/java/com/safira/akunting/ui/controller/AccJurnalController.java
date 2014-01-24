@@ -1,12 +1,11 @@
 package com.safira.akunting.ui.controller;
 
-import com.safira.akunting.domain.AccJurnal;
-import com.safira.akunting.domain.AccJurnalDetail;
 import com.safira.akunting.domain.User;
+import com.safira.akunting.domain.acc.AccJurnal;
+import com.safira.akunting.domain.acc.AccJurnalDetail;
 import com.safira.akunting.service.AccJurnalRestfulService;
 import java.net.URI;
 import java.util.Date;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;

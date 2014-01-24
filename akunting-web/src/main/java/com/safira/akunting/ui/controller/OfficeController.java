@@ -1,11 +1,14 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.safira.akunting.ui.controller;
 
-import com.safira.akunting.domain.acc.CoaType;
+import com.safira.akunting.domain.acc.Office;
 import com.safira.akunting.service.MasterRestfulService;
+import com.safira.akunting.service.SystemRestfulService;
 import java.net.URI;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -31,64 +34,62 @@ import org.springframework.web.util.UriTemplate;
  * @author faheem
  */
 @Controller
-public class AccTypeController {
+public class OfficeController {
     @Autowired
-    MasterRestfulService masterRestfulService;
+    private MasterRestfulService masterService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    @RequestMapping("/acc-type/{typeId}")
+
+    @RequestMapping("/office/{id}")
     @ResponseBody
-    public CoaType findById(@PathVariable String typeId) {
-        CoaType x = masterRestfulService.findByTypeId(typeId);
+    public Office findById(@PathVariable String id) {
+        Office x = masterService.findByOfficeId(id);
         if (x == null) {
             throw new IllegalStateException();
         }
         return x;
     }
-    
-    @RequestMapping(value = "/acc-type", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/office", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody @Valid CoaType x, HttpServletRequest request, HttpServletResponse response) {
-        masterRestfulService.save(x);
+    public void create(@RequestBody @Valid Office x, HttpServletRequest request, HttpServletResponse response) {
+        masterService.save(x);
         String requestUrl = request.getRequestURL().toString();
-        URI uri = new UriTemplate("{requestUrl}/{typeId}").expand(requestUrl, x.getTypeId());
+        URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, x.getId());
         response.setHeader("Location", uri.toASCIIString());
     }
-    
-    @RequestMapping(method = RequestMethod.PUT, value = "/acc-type/{typeId}")
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/office/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable String typeId, @RequestBody @Valid CoaType x) {
-        CoaType a = masterRestfulService.findByTypeId(typeId);
+    public void update(@PathVariable String id, @RequestBody @Valid Office x) {
+        Office a = masterService.findByOfficeId(id);
         if (a == null) {
-            logger.warn("Tipe Akund dengan nomor [{}] tidak ditemukan", typeId);
+            logger.warn("Office dengan id [{}] tidak ditemukan", id);
             throw new IllegalStateException();
         }
-        x.setTypeId(a.getTypeId());
-        masterRestfulService.save(x);
+        x.setId(a.getId());
+        masterService.save(x);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/acc-type/{typeId}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/office/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable String typeId) {
-        CoaType a = masterRestfulService.findByTypeId(typeId);
+    public void delete(@PathVariable String id) {
+        Office a = masterService.findByOfficeId(id);
         if (a == null) {
-            logger.warn("Tipe akun dengan id [{}] tidak ditemukan", typeId);
+            logger.warn("Office dengan id [{}] tidak ditemukan", id);
             throw new IllegalStateException();
         }
-        masterRestfulService.delete(a);
+        masterService.delete(a);
     }
 
-    @RequestMapping(value = "/acc-type", method = RequestMethod.GET)
+    @RequestMapping(value = "/office", method = RequestMethod.GET)
     @ResponseBody
-    public List<CoaType> findAll(HttpServletResponse response) {
-        //List<CoaType> hasil = masterRestfulService.findAllAccGroups(pageable).getContent();
-        List<CoaType> hasil = masterRestfulService.listAll();
-//        for(AccCoa r : hasil){
-//            r.setPermissionSet(null);
-//            r.setMenuSet(null);
-//        }
-        return hasil;
+    public List<Office> findAll(
+            Pageable pageable,
+            HttpServletResponse response) {
+        //List<Office> hasil = masterService.findAllOffice(pageable).getContent();
+        List<Office> hasil = masterService.listAllOffice();
 
+        return hasil;
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -96,4 +97,5 @@ public class AccTypeController {
     public void handle() {
         logger.debug("Resource dengan URI tersebut tidak ditemukan");
     }
+
 }
