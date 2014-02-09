@@ -1,0 +1,64 @@
+<div class="row">		
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading fa-2x">
+                Jenis Akun
+            </div> <!--panel heading-->
+
+            <div class="panel-body col-md-12">
+                <div class=" form-group input-group">
+                    <!--<a class="btn btn-primary" ng-click="baru()"><i class="icon-plus icon-white"></i> Tambah</a>-->
+                    <input type="text" class="col-md-2 form-control" ng-model="search" on-enter="reloadPage()" placeholder="Search" autofocus>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="reloadCoaPage()"><i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                    <span class="input-group-btn col-lg-5"></span>
+                    <span class="input-group-btn col-md-2">
+                        <button class="btn btn-primary fa fa-plus" type="button" ng-click="baru()">
+                            New
+                        </button>
+                    </span>
+                </div>
+                
+            </div>
+            <div class="panel-body" id="coa-list" >
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" id="example">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Jenis Akun</th>
+                                <th>Grup</th>
+                                <th>Keterangan</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>   
+                        <tbody>
+                            <tr ng-repeat="c in accTypeList | filter: search | orderBy:groupName ">
+                                <td>{{c.typeId}}</td>
+                                <td>{{c.typeName}}</td>
+                                <td>{{c.groupName}}</td>
+                                <td>{{c.catatan}}</td>
+                                <td class="center">
+                                    <a href="" ng-click="edit(c)">
+                                        <i class="fa fa-edit">Edit</i>  
+
+                                    </a>  |
+                                    <a href="" ng-click="remove(c)">
+                                        <i class="fa fa-trash-o"></i> 
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-body" ng-show="accTypeList.length==0">
+                <label class="fa fa-2x">Data tidak ditemukan</label>
+                <a ng-click="refresh()">Refresh</a>
+            </div>
+        </div>
+    </div>
+</div>

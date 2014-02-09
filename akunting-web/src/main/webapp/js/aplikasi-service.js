@@ -1,4 +1,4 @@
-angular.module('belajar.service', ['ngResource'])
+angular.module('akunting.service', [ 'ngResource'])
     .factory('ApplicationConfigService', ['$resource', '$http', function($resource, $http){
         var service = {
             applicationConfig: $resource('config/:configId'),
@@ -129,7 +129,9 @@ angular.module('belajar.service', ['ngResource'])
     .factory('AccTypeService', ['$resource', '$http', function($resource, $http){
         var service = {
             coaType: $resource('acc-type/:typeId'),
-            get: function(param, callback){ return this.coaType.get(param, callback) }, 
+            get: function(param, callback){ 
+                return this.coaType.get(param, callback) 
+            }, 
             query: function(){ return this.coaType.query() },
             save: function(obj){
                 if(obj.typeId == null){
@@ -170,7 +172,31 @@ angular.module('belajar.service', ['ngResource'])
             };
             return service;
     }])
-    .factory('CoaService', ['$resource', '$http', function($resource, $http){
+    .factory('CurrencyService', ['$resource', '$http', function($resource, $http){
+            var service = {
+                curr: $resource('currency/:id'),
+                get: function(param, callback){return this.curr.get(param, callback)},
+                query: function(){return this.curr.query()},
+                save : function(obj){
+                    if(obj.id ==null){
+                        return $http.post('currency', obj);
+                    }else{
+                        return $http.post('currency/'+obj.id, obj);
+                    }
+                    
+                },
+                remove: function(obj){
+                    if(obj.id !=null){
+                        return $http.delete('currency/'+obj.id);
+                    }
+                }
+            };
+            return service;
+    }])
+    .factory('CoaService', ['$resource', '$http', 'UserService', function($resource, $http, UserService){
+        $http.get('homepage/userinfo').success(function(data) {
+            $scope.userinfo = data;
+        });
         var service = {
             coa: $resource('coa/:search', {}, {
                 queryPage: {method:'GET', isArray: false}
@@ -180,11 +206,10 @@ angular.module('belajar.service', ['ngResource'])
                 //return this.coa.get(param.accNo+'/edit', callback) }, 
                 return $http.get('coa/'+accNo+'/edit') ;},
             query: function(search, p, callback){ 
-                console.log(search);
                 return this.coa.queryPage(
                 {"search":search, "page.page": p, "page.size": 10}, callback) },
             save: function(obj, oldAccNo){
-                console.log(oldAccNo);
+                obj.user.id=$scope.userinfo.id;
                 if(oldAccNo == null ){
                     return $http.post('coa', obj);
                 } else {

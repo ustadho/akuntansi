@@ -5,7 +5,6 @@
 package com.safira.akunting.ui.controller;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import com.safira.akunting.domain.User;
 import com.safira.akunting.domain.acc.Coa;
 import com.safira.akunting.service.MasterRestfulService;
 import java.net.URI;
@@ -13,7 +12,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

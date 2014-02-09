@@ -3,118 +3,171 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Belajar RESTful</title>
-        <!-- css orang lain -->
+        <title>Belajar Accounting</title>
         <link rel="stylesheet" href="css/jquery-ui.min.css">
-        <link href="css/aplikasi.css" rel="stylesheet">
+        <!--<link href="css/aplikasi.css" rel="stylesheet">-->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="css/select2.css" rel="stylesheet"/>
         <link href="css/bootstrap-datepicker.css" rel="stylesheet"/>
-        
-        <!-- css kita sendiri -->
-        
-    </head>
-    <body ng-app="belajar">
-        <div id="loading">Loading...</div>
+        <link href="css/sb-admin.css" rel="stylesheet">
+        <!-- Page-Level Plugin CSS - Tables -->
+        <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 
-        <!-- header start -->
-        <div class="navbar navbar-inverse navbar-static-top">
-            <div class="navbar-inner">
-                <div class="container">
-                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    </head>
+
+    <body  ng-app="akunting" >
+        <div id="wrapper">
+
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                      </button>
-                    <a class="brand" href="#">Modul Akunting</a>
-                    <div class="nav-collapse collapse" ng-controller="MenubarController">
-                        <ul class="nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-header">Pengaturan Sistem</li>
-                                    <li><a href="#system/config">Konfigurasi Aplikasi</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Ijin Akses</li>
-                                    <li><a href="#/system/user">User</a></li>
-                                    <li><a href="#/system/role">Role</a></li>
-                                    <li><a href="#/system/permission">Permission</a></li>
-                                    <li><a href="#/system/menu">Menu</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Informasi Sistem</li>
-                                    <li><a href="#system/sessions">User Aktif</a></li>
-                                </ul>
+                    </button>
+                    <a class="navbar-brand fa fa-2x" href="#">Accounting</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#/master/coa">Chart of Account</a></li>
-                                    <li><a href="#/master/test">Test</a></li>
-                                    <li><a href="#">Customer List</a></li>
-                                </ul>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#/transaksi/jurnal">Jurnal Umum</a></li>
-                                    <li><a href="#/transaksi/jurnal-list">Jurnal History</a></li>
-                                    <li><a href="#">Bukti Kas Masuk</a></li>
-                                    <li><a href="#">Bukti Kas Keluar</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laporan <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Jurnal Umum</a></li>
-                                    <li><a href="#">Neraca</a></li>
-                                    <li><a href="#">Laba Rugi</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#about">About</a></li>
-                        </ul>
-                        <ul class="nav pull-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    User : {{ userinfo.user }} | Group : {{ userinfo.group }} <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Ganti Password</a></li>
-                                    <li><a href="#">Opsi</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="j_spring_security_logout">Logout</a></li>
-                                </ul>
+                            <li class="divider"></li>
+                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
-                    </div><!--/.nav-collapse -->
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+            </nav>
+            <!-- /.navbar-static-top -->
+
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-home fa-fw"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Jurnal Umum</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-file fa-fw"></i> Master<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="#/master/coa" class="fa">Chart Of Account</a></li>
+                                <li><a href="#/master/coa-type" class="fa">Jenis Akun</a></li>
+                                <li><a href="#" class="fa">Kantor</a></li>
+                                <li><a href="#" class="fa">Mata Uang</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pencil-square fa-fw"></i> Bukti Kas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="#" class="fa">Bukti Kas Masuk</a></li>
+                                <li><a href="#" class="fa">Bukti Kas Keluar</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> System<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="#system/config" class="fa">Konfigurasi Aplikasi</a></li>
+                                <li><a href="#system/sessions" class="fa">User Aktif</a></li>
+                                <li>
+                                    <a href="#">Ijin Akses<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="#/system/user" class="fa">User</a></li>
+                                        <li><a href="#/system/role" class="fa">Role</a></li>
+                                        <li><a href="#/system/permission" class="fa">Permission</a></li>
+                                        <li><a href="#/system/menu" class="fa">Menu</a></li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li class="active">
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="blank.html" class="fa">Blank Page</a>
+                                </li>
+                                <li>
+                                    <a href="login.html" class="fa">Login Page</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                    <!-- /#side-menu -->
+                </div>
+                <!-- /.sidebar-collapse -->
+            </nav>
+            <!-- /.navbar-static-side -->
+
+            <div id="page-wrapper">
+                <div ng-view>
+
                 </div>
             </div>
         </div>
-        <!-- header end -->
 
-        <div class="container-fluid">
-            <div ng-view></div>
-        </div>
+        <!-- /#wrapper -->
 
         <!-- scriptnya orang lain -->
-        <!--script src="js/jquery.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script-->
-        
-        <script src="js/jquery-1.9.1.js"></script>
+
+        <script src="js/jquery-2.0.0.min.js"></script>
         <script src="js/angular.min.js"></script>
+        <script src="js/angular-route.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="js/sb-admin.js"></script>
         <script src="js/angular-ui.min.js"></script>
+        <script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
         <script src="js/angular-strap.min.js"></script>
         <script src="js/angular-resource.min.js"></script>
         <script src="js/ng-table.js"></script>
         <script src="js/select2.min.js"></script>
+        <script src="js/ui-select2/select2.js"></script>
         <script src="js/underscore-min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/Smart-Table.min.js"></script>
-        
+        <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+
         <!-- script kita sendiri -->
         <script src="js/aplikasi.js"></script>
         <script src="js/aplikasi-service.js"></script>
         <script src="js/aplikasi-controller.js"></script>
+
+        <!-- Page-Level Demo Scripts - Blank - Use for reference -->
+
     </body>
+
 </html>

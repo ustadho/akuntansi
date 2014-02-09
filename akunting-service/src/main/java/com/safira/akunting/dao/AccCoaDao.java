@@ -33,4 +33,7 @@ public interface AccCoaDao extends PagingAndSortingRepository<Coa, String>{
             + "order by ac.accNo")
     List<Coa> listAll();
     
+    @Query("select ac from Coa ac order by ac.accNo")
+    @Override
+    public Page<Coa> findAll(Pageable pgbl);
 }

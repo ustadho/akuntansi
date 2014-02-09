@@ -1,8 +1,8 @@
-<div class="span5 well-large">
+<div class="col-md-5 well-large">
     <h1>Daftar Konfigurasi</h1>
 
-    <a class="btn" ng-click="baru()">
-        <i class="icon-plus-sign"></i>Tambah Data
+    <a class="btn btn-primary" ng-click="baru()">
+        <i class="fa fa-plus"></i>Tambah Data
     </a>
     
     <table class="table table-striped">
@@ -20,8 +20,8 @@
                 <td>{{c.label}}</td>
                 <td>{{c.value}}</td>
                 <td>
-                    <a ng-click="edit(c)"><i class="icon-edit"></i></a>
-                    <a ng-click="remove(c)"><i class="icon-remove"></i></a>
+                    <a href="" ng-click="edit(c)"><i class="glyphicon glyphicon-edit"> </i></a> &nbsp;
+                    <a href="" ng-click="remove(c)"><i class="glyphicon glyphicon-remove"> </i></a>
                 </td>
             </tr>
         </tbody>
@@ -29,23 +29,23 @@
 
 </div>
 
-<div class="span5 well-large">
+<div class="col-md-5 well-large">
     <h1>Form Konfigurasi</h1>
     <form class="form-horizontal" name="formEdit">
-        <div class="control-group" ng-class="{error: formEdit.name.$invalid}">
+        <div class="control-group" ng-class="{'has-error': formEdit.name.$invalid}">
             <label class="control-label" for="name">Nama : &nbsp;</label>
-            <input type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name" required ui-validate="{configNameAvailable: isConfigNameAvailable}">
+            <input type="text" id="name" class="form-control control-group" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name" required ui-validate="{configNameAvailable: isConfigNameAvailable}">
             <span ng-show="formEdit.name.$error.required" class="help-inline">Harus diisi</span>
             <span ng-show="formEdit.name.$error.configNameAvailable" class="help-inline">sudah ada yang pakai</span>
         </div>
-        <div class="control-group" ng-class="{error: formEdit.label.$invalid}">
+        <div class="control-group" ng-class="{'has-error': formEdit.label.$invalid}">
             <label class="control-label" for="label">Label : &nbsp;</label>
-            <input type="text" id="label" name="label" placeholder="Label Konfigurasi" ng-model="currentConfig.label" required>
+            <input type="text" class="form-control control-group" id="label" name="label" placeholder="Label Konfigurasi" ng-model="currentConfig.label" required>
             <span ng-show="formEdit.label.$error.required" class="help-inline">Harus diisi</span>
         </div>
-        <div class="control-group" ng-class="{error: formEdit.value.$invalid}">
+        <div class="control-group" ng-class="{'has-error': formEdit.value.$invalid}">
             <label class="control-label" for="value">Nilai : &nbsp;</label>
-            <input type="text" id="value" name="value" placeholder="Nilai Konfigurasi" ng-model="currentConfig.value" required>
+            <input type="text" class="form-control form-control" id="value" name="value" placeholder="Nilai Konfigurasi" ng-model="currentConfig.value" required>
             <span ng-show="formEdit.value.$error.required" class="help-inline">Harus diisi</span>
         </div>
         <div class="form-actions">

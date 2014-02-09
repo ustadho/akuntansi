@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">×</button>
+    <h3>{{title}}</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="formEdit">
+        <div class="form-group" ng-class="{'has-error': formEdit.typeId.$invalid}">
+            <label for="typeId" class="control-label col-xs-2" style="text-align: left">
+                Kode
+            </label>
+            <div class="col-xs-2">
+                <input type="text" id="typeId" ng-disabled="original.typeId" name="typeId" 
+                       class="form-control" placeholder="Kode" ng-model="currentType.typeId" required 
+                       ui-validate="{typeIdAvailable: isTypeIdAvailable}">
+            </div>
+             <span ng-show="formEdit.typeId.$error.required" class="help-block col-sm-2">Harus diisi</span>
+             <span ng-show="formEdit.typeId.$error.typeIdAvailable:" class="help-block col-sm-2">Sudah dipakai</span>
+        </div>
+        <div class="form-group has-error">
+            <label for="typeName" class="control-label col-xs-2" style="text-align: left">
+                Username
+            </label>
+            <div class="col-xs-10">
+                <input type="text" id="typeName" class="form-control" placeholder="Jenis Coa" ng-model="currentType.typeName">
+                <!--<span class="help-block">Please enter a valid email address</span>-->
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary fa fa-save" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Save</button>
+    <button class="btn btn-warning " ng-click="cancel()">Cancel</button>
+</div>

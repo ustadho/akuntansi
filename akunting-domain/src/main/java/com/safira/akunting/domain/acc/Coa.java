@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +30,7 @@ public class Coa {
     @Column(name = "acc_no", unique = true, nullable = false)
     @NotNull
     @NotEmpty
+    @OrderBy(value = "accNo")
     private String accNo;
     
     @Column(name = "acc_name", unique = true, nullable = false)

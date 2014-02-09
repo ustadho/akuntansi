@@ -5,7 +5,7 @@
 package com.safira.akunting.service.impl;
 
 import com.safira.akunting.dao.AccCoaDao;
-import com.safira.akunting.dao.AccCurrency;
+import com.safira.akunting.dao.AccCurrencyDao;
 import com.safira.akunting.dao.AccTypeDao;
 import com.safira.akunting.dao.OfficeDao;
 import com.safira.akunting.domain.acc.Coa;
@@ -38,6 +38,9 @@ public class MasterRestfulServiceImpl implements MasterRestfulService{
     
     @Autowired
     private OfficeDao officeDao;
+    
+    @Autowired
+    private AccCurrencyDao accCurrencyDao;
     
     @Override
     public void save(Coa coa) {
@@ -120,7 +123,7 @@ public class MasterRestfulServiceImpl implements MasterRestfulService{
 
     @Override
     public Long countAllAccGroups() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return accTypeDao.count();
     }
 
     @Override
@@ -130,32 +133,32 @@ public class MasterRestfulServiceImpl implements MasterRestfulService{
 
     @Override
     public void save(Currency curr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        accCurrencyDao.save(curr);
     }
 
     @Override
     public void delete(Currency curr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        accCurrencyDao.delete(curr);
     }
 
     @Override
     public Currency findById(String kode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return accCurrencyDao.findOne(kode);
     }
 
     @Override
-    public Page<Currency> findAllCurrency(Pageable page) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Currency> findAllCurrency() {
+        return accCurrencyDao.listAll();
     }
 
     @Override
     public Long countAllCurrency() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return accCurrencyDao.count();
     }
 
     @Override
     public Long countCurrency(String search) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return accCurrencyDao.count(search);
     }
 
     @Override

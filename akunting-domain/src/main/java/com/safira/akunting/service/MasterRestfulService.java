@@ -39,7 +39,7 @@ public interface MasterRestfulService extends MonitoredService{
     public void save(Currency curr);
     public void delete(Currency curr);
     public Currency findById(String kode);
-    public Page<Currency> findAllCurrency(Pageable page);
+    public List<Currency> findAllCurrency();
     public Long countAllCurrency();
     public Long countCurrency(String search);
     

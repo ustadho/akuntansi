@@ -2,7 +2,7 @@
     <div class="span10 well-large">
         <h1>Form Menu</h1>
         <form class="form-horizontal" name="formEdit">
-            <div class="control-group" ng-class="{error: formEdit.label.$invalid}">
+            <div class="control-group" ng-class="{'has-error': formEdit.label.$invalid}">
                 <label class="control-label" for="label">Label : &nbsp;</label>
                 <input type="text" id="label" name="label" placeholder="Label Menu" ng-model="currentMenu.label" required>
                 <span ng-show="formEdit.label.$error.required" class="help-inline">Harus diisi</span>
@@ -18,12 +18,12 @@
                     <option ng-repeat="menu in parentSelection" value="{{menu.id}}">{{menu.label}}</option>
                 </select>
             </div>
-            <div class="control-group" ng-class="{error: formEdit.level.$invalid}">
+            <div class="control-group" ng-class="{'has-error': formEdit.level.$invalid}">
                 <label class="control-label" for="level">Level : &nbsp;</label>
                 <input type="text" id="level" name="level" placeholder="Level" ng-model="currentMenu.level" required>
                 <span ng-show="formEdit.level.$error.required" class="help-inline">Harus diisi</span>
             </div>
-            <div class="control-group" ng-class="{error: formEdit.level.$invalid}">
+            <div class="control-group" ng-class="{'has-error': formEdit.level.$invalid}">
                 <label class="control-label" for="order">Order : &nbsp;</label>
                 <input type="text" id="order" name="order" placeholder="Order" ng-model="currentMenu.order" required>
                 <span ng-show="formEdit.order.$error.required" class="help-inline">Harus diisi</span>

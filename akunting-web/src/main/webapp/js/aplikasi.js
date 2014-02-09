@@ -1,4 +1,4 @@
-angular.module('belajar', ['$strap.directives', 'ui', 'smartTable.table', 'belajar.controller'])
+angular.module('akunting', ['ngRoute', '$strap.directives', 'ui', 'ui.select2', 'ui.bootstrap', 'smartTable.table', 'akunting.controller'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {templateUrl: 'pages/home.html'})
@@ -10,7 +10,7 @@ angular.module('belajar', ['$strap.directives', 'ui', 'smartTable.table', 'belaj
             .when('/system/permission', {templateUrl: 'pages/system/permission.html', controller: 'PermissionController'})
             .when('/system/menu', {templateUrl: 'pages/system/menu.html', controller: 'SystemMenuController'})
             .when('/master/coa', {templateUrl: 'pages/master/coa-list.html', controller: 'CoaController'})
-            .when('/master/test', {templateUrl: 'pages/master/jurnal2.html', controller: 'CoaController'})
+            .when('/master/coa-type', {templateUrl: 'pages/master/coa-type-list.html', controller: 'CoaTypeController'})
             .when('/transaksi/jurnal', {templateUrl: 'pages/transaksi/jurnal.html', controller: 'JurnalController'})
             .when('/transaksi/edit-jurnal/:id', {templateUrl: 'pages/transaksi/jurnal.html', controller: 'JurnalController'})
             .when('/transaksi/jurnal-list', {templateUrl: 'pages/transaksi/jurnal-list.html', controller: 'JurnalController'})
@@ -61,5 +61,25 @@ angular.module('belajar', ['$strap.directives', 'ui', 'smartTable.table', 'belaj
   return function(input) {
     return input ? '\u2713' : '\u2718';
   };
-});
+})
+.directive('onEnter',function() {
+
+  var linkFn = function(scope,element,attrs) {
+    element.bind("keypress", function(event) {
+      if(event.which === 13) {
+        scope.$apply(function() {
+      scope.$eval(attrs.onEnter);
+        });
+        event.preventDefault();
+      }
+    });
+  };
+
+  return {
+    link:linkFn
+  };
+})
+//.run(['uiSelect2Config', function(uiSelect2Config) {
+//    uiSelect2Config.placeholder = "Placeholder text";
+//}])
 ;

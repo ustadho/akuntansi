@@ -210,7 +210,6 @@
 		        <constraints nullable="false" />
 	    	</column>
 		<column name="catatan" type="text"/>
-		<column name="group_id" type="varchar(1)" />
 		<column name="group_name" type="varchar(30)"/>
 	</createTable>
 	<loadData tableName="acc_type" file="com/safira/akunting/db/data/acc_type.csv">

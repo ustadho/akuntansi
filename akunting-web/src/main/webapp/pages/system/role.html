@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span5 well-large">
+    <div class="col-md-5 well-large">
         <h1>Daftar Role</h1>
 
         <a class="btn" ng-click="baru()">
@@ -19,8 +19,8 @@
                     <td>{{x.name}}</td>
                     <td>{{x.description}}</td>
                     <td>
-                        <a ng-click="edit(x)"><i class="icon-edit"></i></a>
-                        <a ng-click="remove(x)"><i class="icon-remove"></i></a>
+                        <a ng-click="edit(x)"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a ng-click="remove(x)"><i class="glyphicon glyphicon-remove"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -28,18 +28,19 @@
 
     </div>
 
-    <div class="span5 well-large">
+    <div class="col-md-5 well-large">
         <h1>Form Role</h1>
         <form class="form-horizontal" name="formEdit">
-            <div class="control-group" ng-class="{error: formEdit.name.$invalid}">
-                <label class="control-label" for="name">Nama : &nbsp;</label>
-                <input type="text" id="name" name="name" placeholder="Nama Role" ng-model="currentRole.name" required ui-validate="{roleNameAvailable: isRoleNameAvailable}">
+            <div class="form-group" ng-class="{'has-error': formEdit.name.$invalid}">
+                <label class="control-label col-sm-2" for="name">Nama : &nbsp;</label>
+                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Role" ng-model="currentRole.name" 
+                       required ui-validate="{roleNameAvailable: isRoleNameAvailable}" >
                 <span ng-show="formEdit.name.$error.required" class="help-inline">Harus diisi</span>
                 <span ng-show="formEdit.name.$error.roleNameAvailable" class="help-inline">sudah ada yang pakai</span>
             </div>
-            <div class="control-group">
+            <div class="form-group">
                 <label class="control-label" for="description">Keterangan : &nbsp;</label>
-                <input type="text" id="description" name="description" placeholder="Keterangan" ng-model="currentRole.description">
+                <input class="form-control" type="text" id="description" name="description" placeholder="Keterangan" ng-model="currentRole.description">
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
