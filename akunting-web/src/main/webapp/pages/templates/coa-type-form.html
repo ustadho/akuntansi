@@ -10,24 +10,37 @@
             </label>
             <div class="col-xs-2">
                 <input type="text" id="typeId" ng-disabled="original.typeId" name="typeId" 
-                       class="form-control" placeholder="Kode" ng-model="currentType.typeId" required 
+                       class="form-control" placeholder="Kode" ng-model="$parent.currentType.typeId" required 
                        ui-validate="{typeIdAvailable: isTypeIdAvailable}">
             </div>
-             <span ng-show="formEdit.typeId.$error.required" class="help-block col-sm-2">Harus diisi</span>
-             <span ng-show="formEdit.typeId.$error.typeIdAvailable:" class="help-block col-sm-2">Sudah dipakai</span>
+             <span ng-show="formEdit.typeId.$error.required" class="help-block">Harus diisi</span>
+             <span ng-show="formEdit.typeId.$error.typeIdAvailable" class="help-block">Sudah dipakai</span>
+             
         </div>
         <div class="form-group has-error">
             <label for="typeName" class="control-label col-xs-2" style="text-align: left">
-                Username
+                Jenis
             </label>
             <div class="col-xs-10">
-                <input type="text" id="typeName" class="form-control" placeholder="Jenis Coa" ng-model="currentType.typeName">
+                <input type="text" id="typeName" class="form-control" placeholder="Jenis Coa" ng-model="$parent.currentType.typeName">
                 <!--<span class="help-block">Please enter a valid email address</span>-->
             </div>
+        </div>
+        <div class="form-group"  ng-class="{'has-error': formEdit.groupName.$invalid}">
+            <label class="control-label col-sm-2 left" for="groupName">Grup</label>
+            <select ui-select2 class="col-sm-10" ng-model="$parent.currentType.groupName" data-placeholder="Group" id="groupName" required="true">
+                <option value=""></option>
+                <option value="AKTIVA">AKTIVA</option>
+                <option value="PASIVA">PASIVA</option>
+                <option value="MODAL">MODAL</option>
+                <option value="PENDAPATAN">PENDAPATAN</option>
+                <option value="BIAYA">BIAYA</option>
+            </select>
+            <span ng-show="formEdit.groupName.$error.required" class="help-inline">Harus diisi</span>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary fa fa-save" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Save</button>
-    <button class="btn btn-warning " ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary glyphicon glyphicon-save" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Save</button>
+    <button class="btn btn-warning glyphicon glyphicon-remove" ng-click="cancel()">Cancel</button>
 </div>

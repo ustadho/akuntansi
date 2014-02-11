@@ -419,6 +419,7 @@ angular.module('akunting.controller', ['akunting.service'])
                     return angular.equals($scope.original, $scope.currentUser);
                 }
                 $scope.isUsernameAvailable = function(value) {
+                    console.log('isUsernameAvailable', value);
                     if ($scope.currentUser != null && $scope.currentUser.id != null) {
                         return true;
                     }
@@ -431,8 +432,8 @@ angular.module('akunting.controller', ['akunting.service'])
                     return true;
                 }
             }])
-        .controller('CoaController', ['$scope', '$http', '$modal', '$log', 'CoaService', 'AccTypeService', 'OfficeService', 'CurrencyService', '$window',
-            function($scope, $http, $modal, $log, CoaService, AccTypeService, OfficeService, CurrencyService, $window) {
+        .controller('CoaController', ['$scope', '$modal', '$log', 'CoaService', 'AccTypeService', 'OfficeService', 'CurrencyService', '$window',
+            function($scope, $modal, $log, CoaService, AccTypeService, OfficeService, CurrencyService, $window) {
                 $scope.coa = CoaService.query(0, 1000);
                 $scope.accTypeList = AccTypeService.query();
                 $scope.officeList = OfficeService.query();
@@ -445,6 +446,22 @@ angular.module('akunting.controller', ['akunting.service'])
                 CoaService.listAll().success(function(data) {
                     $scope.allCoa = data;
                 });
+//                $scope.test = function() {
+//                    console('isAccNoAvailable :');
+////                    if (value === '' || value===$scope.original.accNo) {
+////                        return true;
+////                    }
+////                    for (var i = 0; i < $scope.allCoa.length; i++) {
+////                        var u = $scope.allCoa[i];
+////                        //console.log("AccNo: " + u.accNo);
+////                        if (u.accNo === value && u.accNo != $scope.original.accNo) {
+////                            return false;
+////                        }
+////                    }
+//                    return 'true';
+//                };
+                
+                
                 
                 $scope.reloadCoaPage = function() {
                     $scope.currentPage = $scope.search != $scope.oldSearch ? 1 : $scope.currentPage;
@@ -479,7 +496,6 @@ angular.module('akunting.controller', ['akunting.service'])
                 $scope.reloadCoaPage();
 
                 $scope.baru = function() {
-                    console.log('Masuk method baru()')
                     var modalInstance = $modal.open({
                         templateUrl: 'pages/templates/coa-form.html',
                         controller: 'CoaModalInstanceController',
@@ -504,7 +520,8 @@ angular.module('akunting.controller', ['akunting.service'])
                     modalInstance.result.then(function(coa) {
                         $scope.coa = coa;
                     }, function() {
-                        $log.info('Modal dismissed at: ' + new Date())
+                        $log.info('Modal dismissed at: ' + new Date());
+                        $scope.reloadCoaPage();
                     });
                 };
 
@@ -535,20 +552,38 @@ angular.module('akunting.controller', ['akunting.service'])
                         console.log($scope.coa);
                     }, function() {
                         $log.info('Modal dismissed at: ' + new Date());
+                        $scope.reloadPage();
                     });
                 };
+                
+                $scope.isAccNoAvailable = function(value){
+//                    if(value ==='' || ($scope.original !=null && value===$scope.original.accNo)){
+//                        return true;
+//                    }
+//                    console.log('allCoa', $scope.allCoa);
+//                    for(var i=0; i<$scope.allCoa.length; i++){
+//                        var c=$scope.allCoa[i];
+//                        if(c.accNo ===value ){
+//                            return false;
+//                        }
+//                    }
+                    return false;
+                }
+                
             }])
         .controller('CoaModalInstanceController', [
-            '$scope', '$modalInstance', 'allCoa', 'coa', 'accTypeList', 'officeList', 'currencyList', 'CoaService',
-            function($scope, $modalInstance, allCoa, coa, accTypeList, officeList, currencyList, CoaService) {
+            '$http', '$scope', '$modalInstance', 'allCoa', 'coa', 'accTypeList', 'officeList', 'currencyList', 'CoaService',
+            function($http, $scope, $modalInstance, allCoa, coa, accTypeList, officeList, currencyList, CoaService) {
                 $scope.accTypeList = accTypeList;
                 $scope.officeList = officeList;
                 $scope.currencyList = currencyList;
                 $scope.allCoa=allCoa;
                 $scope.currentCoa = coa;
                 $scope.original=coa;
-                console.log($scope.original);
                 
+                $http.get('homepage/userinfo').success(function(data) {
+                    $scope.userinfo = data;
+                });
                 $scope.edit = function(x) {
                     if (x.accNo == null) {
                         return;
@@ -565,7 +600,8 @@ angular.module('akunting.controller', ['akunting.service'])
                     if (!$scope.currentCoa) {
                         $scope.title = "Tambah CoA";
                         console.log('$scope.currentCoa === null');
-                        $scope.oldAccNo = null;
+                        $scope.original=null;
+                        $scope.currentCoa={active: true};
                     } else {
                         
                         $scope.title = "Edit CoA";
@@ -577,9 +613,18 @@ angular.module('akunting.controller', ['akunting.service'])
                 $scope.simpan = function() {
 
                     console.log('Simpan COA');
-                    console.log($scope.currentCoa);
+                    if($scope.currentCoa.active==null){
+                        $scope.currentCoa.active=true;
+                    }
+                    if($scope.currentCoa.isBudget==null){
+                        $scope.currentCoa.isBudget=true;
+                    }
+                    if($scope.currentCoa.user==null){
+                        $scope.currentCoa.user={id: $scope.userinfo.id};
+                    }
                     
-                    CoaService.save($scope.currentCoa, $scope.original==null? null: $scope.original).success(function() {
+                    console.log('currentCoa', $scope.currentCoa);
+                    CoaService.save($scope.currentCoa, $scope.original==null? null: $scope.original.accNo).success(function() {
                         $modalInstance.close($scope.currentCoa);
                     });
                 }
@@ -588,22 +633,10 @@ angular.module('akunting.controller', ['akunting.service'])
                     $modalInstance.dismiss('cancel');
                 };
                 $scope.isClean = function() {
+                    console.log('CurrentCoa', $scope.currentCoa);
                     return angular.equals($scope.original, $scope.currentCoa);
                 }
-                $scope.isAccNoAvailable = function(value) {
-                    console('isAccNoAvailable :')
-                    if (value === '' || value===$scope.original.accNo) {
-                        return true;
-                    }
-                    for (var i = 0; i < $scope.allCoa.length; i++) {
-                        var u = $scope.allCoa[i];
-                        //console.log("AccNo: " + u.accNo);
-                        if (u.accNo === value && u.accNo != $scope.original.accNo) {
-                            return false;
-                        }
-                    }
-                    return true;
-                };
+                
                 $scope.isAccNameAvailable = function(value) {
                     if (value === '' || value===$scope.original.accName) {
                         return true;
@@ -660,6 +693,7 @@ angular.module('akunting.controller', ['akunting.service'])
                     });
                     modalInstance.result.then(function(type) {
                         $scope.coaType = type;
+                        $scope.reloadPage();
                     }, function() {
                         $log.info('Modal dismissed at: ' + new Date())
                     });
@@ -680,6 +714,7 @@ angular.module('akunting.controller', ['akunting.service'])
                         $scope.coaType = coaType;
                         console.log($scope.coa);
                     }, function() {
+                        $scope.reloadPage();
                         $log.info('Modal dismissed at: ' + new Date());
                     });
                 };
@@ -691,9 +726,6 @@ angular.module('akunting.controller', ['akunting.service'])
                 $scope.title = coaType.typeId === null ? "Tambah Jenis Coa" : "Edit Jenis CoA";
                 $scope.coaType = coaType;
                 $scope.allType = AccTypeService.query();
-                $scope.select2Options = {
-                    allowClear: true
-                };
 
                 $scope.edit = function(x) {
                     if (x.typeId == null) {
@@ -714,7 +746,9 @@ angular.module('akunting.controller', ['akunting.service'])
                 }
 
                 $scope.simpan = function() {
-                    AccTypeService.save($scope.currentType, $scope.oldAccNo).success(function() {
+                    console.log($scope.currentType);
+                    AccTypeService.save($scope.currentType, $scope.original==null? null: $scope.original.typeId)
+                            .success(function() {
 //                        $scope.coa = CoaService.query();
 //                        $scope.reloadCoaPage();
 //                        $scope.baru();
@@ -729,24 +763,25 @@ angular.module('akunting.controller', ['akunting.service'])
                     return angular.equals($scope.original, $scope.currentType);
                 }
                 $scope.isTypeIdAvailable = function(value) {
-                    if ($scope.currentType != null && $scope.currentType.typeId != null) {
+                    
+                    if (value == '' || ($scope.original!=null && value==$scope.original.typeId)) {
                         return true;
                     }
-                    for (var i = 0; i < $scope.currentType.length; i++) {
-                        var u = $scope.users[i];
-                        if (u.username === value) {
+                    for (var i = 0; i < $scope.allType.length; i++) {
+                        var t = $scope.allType[i];
+                        if (t.typeId === value) {
                             return false;
                         }
                     }
                     return true;
                 }
                 $scope.isAccNameAvailable = function(value) {
-                    if (value === '') {
+                    if (value === '' || ($scope.original!=null && value==$scope.original.typeName)) {
                         return true;
                     }
-                    for (var i = 0; i < $scope.allCoa.length; i++) {
-                        var u = $scope.allCoa[i];
-                        if (u.accName === value && u.accNo != $scope.oldAccNo) {
+                    for (var i = 0; i < $scope.allType.length; i++) {
+                        var u = $scope.allType[i];
+                        if (u.typeName === value && u.typeName != $scope.original.typeName) {
                             return false;
                         }
                     }

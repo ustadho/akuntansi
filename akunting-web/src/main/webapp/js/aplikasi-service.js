@@ -133,8 +133,8 @@ angular.module('akunting.service', [ 'ngResource'])
                 return this.coaType.get(param, callback) 
             }, 
             query: function(){ return this.coaType.query() },
-            save: function(obj){
-                if(obj.typeId == null){
+            save: function(obj, oldType){
+                if(oldType == null){
                     return $http.post('acc-type', obj);
                 } else {
                     return $http.put('acc-type/'+obj.typeId, obj);
@@ -194,9 +194,7 @@ angular.module('akunting.service', [ 'ngResource'])
             return service;
     }])
     .factory('CoaService', ['$resource', '$http', 'UserService', function($resource, $http, UserService){
-        $http.get('homepage/userinfo').success(function(data) {
-            $scope.userinfo = data;
-        });
+        
         var service = {
             coa: $resource('coa/:search', {}, {
                 queryPage: {method:'GET', isArray: false}
@@ -209,8 +207,9 @@ angular.module('akunting.service', [ 'ngResource'])
                 return this.coa.queryPage(
                 {"search":search, "page.page": p, "page.size": 10}, callback) },
             save: function(obj, oldAccNo){
-                obj.user.id=$scope.userinfo.id;
+                
                 if(oldAccNo == null ){
+                    console.log(obj, obj);
                     return $http.post('coa', obj);
                 } else {
                     return $http.put('coa/'+oldAccNo, obj);
